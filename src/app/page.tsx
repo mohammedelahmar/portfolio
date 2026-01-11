@@ -103,9 +103,11 @@ export default function Home() {
   const [commandInput, setCommandInput] = useState("");
   const [commandHistory, setCommandHistory] = useState<string[]>([
     "user@mohammed:~$ help",
-    "commands: help · clear · goto projects · whoami",
+    "commands: help · clear · goto projects · whoami · download cv · sudo login",
   ]);
   const [activeSection, setActiveSection] = useState<string | null>(null);
+  const [passwordMode, setPasswordMode] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   type ActionState = { status: "idle" | "success" | "error"; message?: string };
   const [contactState, formAction] = useActionState<ActionState, FormData>(
     sendContactEmail,
@@ -176,16 +178,33 @@ export default function Home() {
   }, []);
 
   const handleCommand = (cmdRaw: string) => {
-    const cmd = cmdRaw.trim().toLowerCase();
+    const cmd = cmdRaw.trim();
     if (!cmd) return;
+
     const append = (lines: string[]) =>
       setCommandHistory((prev) => [...prev, ...lines].slice(-50));
 
-    switch (cmd) {
+    // 1. PASSWORD MODE (Hidden Input Logic)
+    if (passwordMode) {
+      if (cmd === "admin") {
+        append([`root@mohammed:~$ *****`, "ACCESS GRANTED.", "Loading admin modules..."]);
+        setIsAdmin(true);
+        setPasswordMode(false);
+      } else {
+        append([`root@mohammed:~$ *****`, "ACCESS DENIED.", "Incident reported."]);
+        setPasswordMode(false);
+      }
+      setCommandInput("");
+      return;
+    }
+
+    // 2. STANDARD COMMAND MODE
+    const lowerCmd = cmd.toLowerCase();
+    switch (lowerCmd) {
       case "help":
         append([
           `user@mohammed:~$ ${cmdRaw}`,
-          "commands: help · clear · goto projects · whoami · download cv",
+          "commands: help · clear · goto projects · whoami · download cv · sudo login",
         ]);
         break;
       case "clear":
@@ -205,6 +224,23 @@ export default function Home() {
           "security-focused engineer · red/blue crossover · builds control-room UIs",
         ]);
         break;
+
+      // TRIGGER THE SECRET MODE
+      case "sudo login":
+      case "login admin":
+        append([`user@mohammed:~$ ${cmdRaw}`, "Enter root password:"]);
+        setPasswordMode(true);
+        break;
+
+      case "logout":
+        if (isAdmin) {
+          setIsAdmin(false);
+          append([`user@mohammed:~$ ${cmdRaw}`, "Session terminated."]);
+        } else {
+          append([`user@mohammed:~$ ${cmdRaw}`, "You are not logged in."]);
+        }
+        break;
+
       default:
         append([`user@mohammed:~$ ${cmdRaw}`, "command not found. try 'help'"]);
     }
@@ -445,6 +481,7 @@ export default function Home() {
                     <span className="text-emerald-400">{">"}</span>
                     <input
                       value={commandInput}
+                      type={passwordMode ? "password" : "text"}
                       onChange={(e) => setCommandInput(e.target.value)}
                       onKeyDown={(e) => {
                         if (e.key === "Enter") {
@@ -453,7 +490,8 @@ export default function Home() {
                         }
                       }}
                       className="w-full bg-transparent text-emerald-100 outline-none placeholder:text-emerald-700"
-                      placeholder="type a command (help)"
+                      placeholder={passwordMode ? "password..." : "type a command (help)"}
+                      autoComplete="off"
                       aria-label="terminal input"
                     />
                   </div>
@@ -669,6 +707,70 @@ export default function Home() {
                 </ul>
               </div>
             </motion.div>
+          </motion.div>
+        )}
+
+        {isAdmin && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-xl"
+          >
+            <div className="w-[min(800px,90vw)] overflow-hidden rounded-3xl border border-red-500/30 bg-slate-950 shadow-[0_0_50px_rgba(239,68,68,0.2)]">
+              {/* Header */}
+              <div className="flex items-center justify-between border-b border-red-500/20 bg-red-500/5 px-6 py-4">
+                <div className="flex items-center gap-3">
+                  <ShieldCheck size={20} className="text-red-500" />
+                  <span className="font-mono text-sm uppercase tracking-[0.2em] text-red-100">
+                    Restricted Area // Admin
+                  </span>
+                </div>
+                <button
+                  onClick={() => setIsAdmin(false)}
+                  className="rounded-full bg-red-500/10 px-4 py-1 text-xs font-bold text-red-400 hover:bg-red-500/20"
+                >
+                  LOGOUT
+                </button>
+              </div>
+
+              {/* Dashboard Content */}
+              <div className="p-8">
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                  {/* Stat 1 */}
+                  <div className="space-y-2 rounded-xl border border-red-500/20 bg-red-500/5 p-5">
+                    <div className="text-xs uppercase text-red-400">System Status</div>
+                    <div className="text-2xl font-bold text-red-100">OPTIMAL</div>
+                    <div className="font-mono text-xs text-red-400/60">
+                      All security protocols active.
+                    </div>
+                  </div>
+
+                  {/* Stat 2 */}
+                  <div className="space-y-2 rounded-xl border border-red-500/20 bg-red-500/5 p-5">
+                    <div className="text-xs uppercase text-red-400">Visitor IP</div>
+                    <div className="text-2xl font-bold text-red-100">127.0.0.1</div>
+                    <div className="font-mono text-xs text-red-400/60">
+                      Trace complete.
+                    </div>
+                  </div>
+
+                  {/* Stat 3 (Messages) */}
+                  <div className="col-span-1 md:col-span-2 space-y-2 rounded-xl border border-red-500/20 bg-red-500/5 p-5">
+                    <div className="text-xs uppercase text-red-400">Inbox</div>
+                    <div className="text-lg text-red-100">No new encrypted messages.</div>
+                    <div className="mt-2 h-1 w-full overflow-hidden rounded-full bg-red-900/30">
+                      <div className="h-full w-[0%] bg-red-500"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-8 font-mono text-xs text-red-500/50">
+                  {">"} LAST LOGIN: {new Date().toLocaleTimeString()} <br />
+                  {">"} AUTHORIZED PERSONNEL ONLY
+                </div>
+              </div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
