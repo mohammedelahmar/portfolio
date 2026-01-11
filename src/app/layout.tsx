@@ -16,6 +16,9 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Digital Command Center | Portfolio 2026",
   description: "A clean-cyber, high-tech interactive portfolio.",
+  icons: {
+    icon: "/terminal-favicon.svg",
+  },
 };
 
 export default function RootLayout({
@@ -26,6 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
+        suppressHydrationWarning
         className={`${geistSans.variable} ${jetbrainsMono.variable} antialiased`}
       >
         {children}

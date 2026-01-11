@@ -1,0 +1,142 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fdfbf7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f2efe9;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#d4af37;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#c5a028;stop-opacity:1" />
+    </linearGradient>
+    <filter id="dropShadow" height="130%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+      <feOffset dx="2" dy="2" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.2"/>
+      </feComponentTransfer>
+      <feMerge> 
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="800" height="600" fill="url(#bgGradient)" rx="10" ry="10"/>
+
+  <g transform="translate(400, 60)" text-anchor="middle">
+    <text x="0" y="0" font-family="Georgia, serif" font-size="38" font-weight="bold" fill="#333">Elegance Shop</text>
+    <text x="0" y="30" font-family="Arial, sans-serif" font-size="20" fill="#666">A Full-Featured MERN Stack E-commerce Application</text>
+  </g>
+
+  <g transform="translate(100, 480)">
+    <g transform="translate(0, 0)">
+      <path d="M40 0C40 0 25 15 25 40C25 65 40 80 40 80C40 80 55 65 55 40C55 15 40 0 40 0ZM40 65C38 65 35 55 35 40C35 25 38 15 40 15C42 15 45 25 45 40C45 55 42 65 40 65Z" fill="#4DB33D"/>
+      <text x="40" y="95" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#333">MongoDB</text>
+      <text x="40" y="115" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#666">Product &amp; User Data</text>
+    </g>
+    <path d="M100 40 L140 40" stroke="#999" stroke-width="3" marker-end="url(#arrowhead)"/>
+    <g transform="translate(160, 0)">
+      <rect x="10" y="10" width="60" height="60" rx="5" ry="5" fill="#eee" stroke="#333" stroke-width="2"/>
+      <text x="40" y="48" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#333">EX</text>
+      <text x="40" y="95" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#333">Express</text>
+      <text x="40" y="115" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#666">Backend API</text>
+    </g>
+    <path d="M260 40 L300 40" stroke="#999" stroke-width="3" marker-end="url(#arrowhead)"/>
+    <g transform="translate(320, 0)">
+      <circle cx="40" cy="40" r="8" fill="#61DAFB"/>
+      <g fill="none" stroke="#61DAFB" stroke-width="3">
+        <ellipse cx="40" cy="40" rx="35" ry="15"/>
+        <ellipse cx="40" cy="40" rx="35" ry="15" transform="rotate(60 40 40)"/>
+        <ellipse cx="40" cy="40" rx="35" ry="15" transform="rotate(120 40 40)"/>
+      </g>
+      <text x="40" y="95" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#333">React</text>
+      <text x="40" y="115" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#666">Interactive UI</text>
+    </g>
+    <path d="M420 40 L460 40" stroke="#999" stroke-width="3" marker-end="url(#arrowhead)"/>
+    <g transform="translate(480, 0)">
+      <path d="M40 0 L75 20 L75 60 L40 80 L5 60 L5 20 Z" fill="#8CC84B"/>
+      <text x="40" y="48" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#fff">Node</text>
+      <text x="40" y="95" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#333">Node.js</text>
+      <text x="40" y="115" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#666">Server Logic</text>
+    </g>
+  </g>
+
+  <g transform="translate(50, 130)">
+    <g>
+      <rect x="0" y="0" width="480" height="300" rx="15" ry="15" fill="#fff" filter="url(#dropShadow)"/>
+      <rect x="0" y="0" width="480" height="50" rx="15" ry="15" fill="#f9f9f9"/>
+      <text x="20" y="32" font-family="Georgia, serif" font-size="20" fill="#d4af37" font-weight="bold">ES</text>
+      <text x="60" y="32" font-family="Arial, sans-serif" font-size="14" fill="#666">Home</text>
+      <text x="110" y="32" font-family="Arial, sans-serif" font-size="14" fill="#666">Shop</text>
+      <text x="160" y="32" font-family="Arial, sans-serif" font-size="14" fill="#666">About</text>
+      <rect x="320" y="15" width="100" height="25" rx="12.5" ry="12.5" fill="#eee"/>
+      <text x="335" y="32" font-family="Arial, sans-serif" font-size="12" fill="#999">Search...</text>
+      <circle cx="440" cy="27.5" r="12" fill="#d4af37"/>
+      <path d="M435 27.5 L440 32.5 L445 22.5" stroke="#fff" stroke-width="2" fill="none"/> <g transform="translate(20, 70)">
+        <rect width="440" height="100" rx="8" ry="8" fill="url(#goldGradient)"/>
+        <text x="20" y="40" font-family="Georgia, serif" font-size="24" fill="#fff" font-weight="bold">Summer Collection</text>
+        <text x="20" y="65" font-family="Arial, sans-serif" font-size="14" fill="#fff">Discover the latest trends in luxury fashion.</text>
+        <rect x="20" y="80" width="80" height="25" rx="12.5" ry="12.5" fill="#fff"/>
+        <text x="60" y="97" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#d4af37" font-weight="bold">Shop Now</text>
+        <circle cx="380" cy="50" r="35" fill="rgba(255,255,255,0.3)"/> </g>
+
+      <g transform="translate(20, 190)">
+        <text x="0" y="0" font-family="Arial, sans-serif" font-size="16" fill="#333" font-weight="bold">Featured Products</text>
+        <g transform="translate(0, 20)">
+          <rect width="130" height="80" rx="8" ry="8" fill="#f9f9f9"/>
+          <rect x="10" y="10" width="110" height="40" rx="4" ry="4" fill="#eee"/> <text x="10" y="65" font-family="Arial, sans-serif" font-size="12" fill="#333">Luxury Watch</text>
+          <text x="10" y="80" font-family="Arial, sans-serif" font-size="12" fill="#d4af37" font-weight="bold">$299.00</text>
+        </g>
+        <g transform="translate(155, 20)">
+          <rect width="130" height="80" rx="8" ry="8" fill="#f9f9f9"/>
+          <rect x="10" y="10" width="110" height="40" rx="4" ry="4" fill="#eee"/> <text x="10" y="65" font-family="Arial, sans-serif" font-size="12" fill="#333">Designer Bag</text>
+          <text x="10" y="80" font-family="Arial, sans-serif" font-size="12" fill="#d4af37" font-weight="bold">$450.00</text>
+        </g>
+        <g transform="translate(310, 20)">
+          <rect width="130" height="80" rx="8" ry="8" fill="#f9f9f9"/>
+          <rect x="10" y="10" width="110" height="40" rx="4" ry="4" fill="#eee"/> <text x="10" y="65" font-family="Arial, sans-serif" font-size="12" fill="#333">Silk Scarf</text>
+          <text x="10" y="80" font-family="Arial, sans-serif" font-size="12" fill="#d4af37" font-weight="bold">$85.00</text>
+        </g>
+      </g>
+    </g>
+
+    <g transform="translate(520, 0)">
+      <rect x="0" y="0" width="230" height="300" rx="15" ry="15" fill="#fff" filter="url(#dropShadow)"/>
+      <text x="115" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#333" font-weight="bold">Key Features</text>
+      
+      <g transform="translate(20, 60)">
+        <circle cx="20" cy="20" r="20" fill="#E3F2FD"/>
+        <path d="M10 20 C10 10 30 10 30 20 L30 30 L10 30 Z M15 20 L15 15 C15 12 25 12 25 15 L25 20" stroke="#2196F3" stroke-width="2" fill="none"/>
+        <text x="50" y="15" font-family="Arial, sans-serif" font-size="14" fill="#333" font-weight="bold">Secure Auth</text>
+        <text x="50" y="32" font-family="Arial, sans-serif" font-size="12" fill="#666">JWT &amp; User Profiles</text>
+      </g>
+
+      <g transform="translate(20, 120)">
+        <circle cx="20" cy="20" r="20" fill="#E8F5E9"/>
+        <path d="M5 10 L10 10 L15 25 L35 25 L40 10 M15 25 C15 30 20 30 20 25 M30 25 C30 30 35 30 35 25" stroke="#4CAF50" stroke-width="2" fill="none"/>
+        <text x="50" y="15" font-family="Arial, sans-serif" font-size="14" fill="#333" font-weight="bold">Shopping Cart</text>
+        <text x="50" y="32" font-family="Arial, sans-serif" font-size="12" fill="#666">Dynamic &amp; Persistent</text>
+      </g>
+
+      <g transform="translate(20, 180)">
+        <circle cx="20" cy="20" r="20" fill="#FFF3E0"/>
+        <rect x="5" y="10" width="30" height="20" rx="2" ry="2" stroke="#FF9800" stroke-width="2" fill="none"/>
+        <line x1="5" y1="18" x2="35" y2="18" stroke="#FF9800" stroke-width="2"/>
+        <text x="50" y="15" font-family="Arial, sans-serif" font-size="14" fill="#333" font-weight="bold">Payment Gateway</text>
+        <text x="50" y="32" font-family="Arial, sans-serif" font-size="12" fill="#666">Stripe/PayPal Support</text>
+      </g>
+
+      <g transform="translate(20, 240)">
+        <circle cx="20" cy="20" r="20" fill="#F3E5F5"/>
+        <path d="M5 5 L35 5 L35 35 L5 35 Z M5 15 L35 15 M15 5 L15 35" stroke="#9C27B0" stroke-width="2" fill="none"/>
+        <text x="50" y="15" font-family="Arial, sans-serif" font-size="14" fill="#333" font-weight="bold">Admin Dashboard</text>
+        <text x="50" y="32" font-family="Arial, sans-serif" font-size="12" fill="#666">Manage Products &amp; Orders</text>
+      </g>
+    </g>
+  </g>
+
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#999"/>
+    </marker>
+  </defs>
+</svg>

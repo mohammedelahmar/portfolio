@@ -1,6 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
 import {
   ArrowUpRight,
   Cpu,
@@ -21,6 +22,7 @@ type Project = {
   accent: "purple" | "green" | "blue" | "red";
   span: string;
   detail: string;
+  image?: string;
 };
 
 const phrases = [
@@ -39,6 +41,7 @@ const projects: Project[] = [
     accent: "purple",
     span: "col-span-12 lg:col-span-7 row-span-2",
     detail: "event-driven carts · rate-limited APIs · audit trails",
+  image: "/projects/elegance.svg",
   },
   {
     title: "Social Signal Intel",
@@ -48,6 +51,7 @@ const projects: Project[] = [
     accent: "green",
     span: "col-span-12 sm:col-span-6 lg:col-span-5",
     detail: "celery workers · headless browsers · alert webhooks",
+  image: "/projects/social-signal.svg",
   },
   {
     title: "Optic Finance Core",
@@ -57,6 +61,7 @@ const projects: Project[] = [
     accent: "blue",
     span: "col-span-12 sm:col-span-6 lg:col-span-5",
     detail: "ocr pipeline · vector store receipts · anomaly flags",
+  image: "/projects/optic-finance.svg",
   },
   {
     title: "Packet Watch / Lab Env",
@@ -66,6 +71,7 @@ const projects: Project[] = [
     accent: "red",
     span: "col-span-12 lg:col-span-7",
     detail: "fortigate sims · kali boxes · blue team drills",
+  image: "/projects/packet-watch.svg",
   },
 ];
 
@@ -172,7 +178,7 @@ export default function Home() {
       case "help":
         append([
           `user@mohammed:~$ ${cmdRaw}`,
-          "commands: help · clear · goto projects · whoami",
+          "commands: help · clear · goto projects · whoami · download cv",
         ]);
         break;
       case "clear":
@@ -181,6 +187,10 @@ export default function Home() {
       case "goto projects":
         append([`user@mohammed:~$ ${cmdRaw}`, "navigating -> projects"]);
         document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
+        break;
+      case "download cv":
+        append([`user@mohammed:~$ ${cmdRaw}`, "opening resume.pdf"]);
+        window.open("/resume.pdf", "_blank");
         break;
       case "whoami":
         append([
@@ -354,7 +364,16 @@ export default function Home() {
                   whileHover={{ y: -6, scale: 1.01 }}
                   transition={{ type: "spring", stiffness: 260, damping: 18 }}
                     onClick={() => setSelectedProject(project)}
-                    className={`${project.span} glass relative flex cursor-pointer flex-col justify-between overflow-hidden rounded-3xl p-6`}
+                  className={`${project.span} glass relative flex cursor-pointer flex-col justify-between overflow-hidden rounded-3xl p-6`}
+                  style={
+                    project.image
+                      ? {
+                          backgroundImage: `linear-gradient(180deg, rgba(2,6,23,0.55), rgba(2,6,23,0.9)), url(${project.image})`,
+                          backgroundSize: "cover",
+                          backgroundPosition: "center",
+                        }
+                      : undefined
+                  }
                 >
                   <div className="flex items-center justify-between text-sm text-slate-300">
                     <span className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em]">
@@ -448,28 +467,30 @@ export default function Home() {
             </motion.article>
 
             <motion.article
-              whileHover={{ y: -4 }}
-              className="col-span-12 sm:col-span-6 lg:col-span-5 glass relative overflow-hidden rounded-3xl p-5"
+              whileHover={{ y: -4, scale: 1.01 }}
+              className="col-span-12 sm:col-span-6 lg:col-span-5 glass relative overflow-hidden rounded-3xl p-0 photo-verify"
             >
-              <div className="flex items-center justify-between text-xs font-mono uppercase tracking-[0.18em] text-slate-300">
-                <span className="flex items-center gap-2">
-                  <span className="h-2 w-2 animate-pulse rounded-full bg-sky-300" />
-                  location
-                </span>
-                <Radar size={14} className="text-sky-300" />
-              </div>
-              <div className="mt-4 flex items-center gap-4">
-                <div className="relative h-28 w-28 rounded-full border border-white/10 bg-gradient-to-br from-slate-800 via-slate-900 to-black">
-                  <div className="absolute inset-3 rounded-full border border-white/10" />
-                  <div className="absolute inset-1 rounded-full border border-white/5" />
-                  <div className="absolute left-1/2 top-1/2 h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-400 shadow-[0_0_16px_rgba(52,211,153,0.9)]" />
-                  <div className="absolute left-[65%] top-[40%] h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-rose-400 shadow-[0_0_14px_rgba(248,113,113,0.9)]" />
-                </div>
-                <div className="space-y-1 text-sm text-slate-100">
-                  <div className="font-mono text-xs uppercase tracking-[0.2em] text-slate-400">current coordinate</div>
-                  <div className="text-lg font-semibold">Souk Larbaa, MA</div>
-                  <div className="font-mono text-xs text-emerald-200">status: online</div>
-                  <div className="text-xs text-slate-400">latency to eu-west: 42ms</div>
+              <div className="relative h-full w-full">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(139,92,246,0.15),transparent_35%)]" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_10%,rgba(16,185,129,0.12),transparent_35%)]" />
+                <Image
+                  src="/profile-bw.svg"
+                  alt="Mohammed El Ahmar"
+                  fill
+                  sizes="(min-width: 1024px) 25vw, 45vw"
+                  className="object-cover opacity-70 transition duration-300 hover:opacity-100 grayscale hover:grayscale-0"
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
+                <div className="absolute bottom-0 left-0 w-full p-5">
+                  <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-emerald-300">
+                    operator: online
+                  </div>
+                  <div className="text-xl font-semibold text-white">Mohammed El Ahmar</div>
+                  <div className="mt-1 flex items-center gap-2 text-xs text-slate-200">
+                    <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-400" />
+                    security id badge
+                  </div>
                 </div>
               </div>
             </motion.article>

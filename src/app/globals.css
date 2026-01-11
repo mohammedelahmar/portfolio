@@ -87,6 +87,31 @@ body {
   color: #c084fc;
 }
 
+.photo-verify::after {
+  content: "verified";
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(16, 185, 129, 0.18);
+  color: #a7f3d0;
+  font-size: 11px;
+  font-family: var(--font-jetbrains-mono), monospace;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+  opacity: 0;
+  transition: opacity 180ms ease, transform 180ms ease;
+  transform: translateY(-4px);
+}
+
+.photo-verify:hover::after {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 @keyframes marquee {
   0% {
     transform: translateX(0);

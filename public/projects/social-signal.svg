@@ -1,0 +1,105 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="instaGradient" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#f09433;stop-opacity:1" />
+      <stop offset="25%" style="stop-color:#e6683c;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#dc2743;stop-opacity:1" />
+      <stop offset="75%" style="stop-color:#cc2366;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#bc1888;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="chartGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2196F3;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#2196F3;stop-opacity:0.1" />
+    </linearGradient>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#fafafa;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f0f2f5;stop-opacity:1" />
+    </linearGradient>
+    <filter id="dropShadow" height="130%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+      <feOffset dx="2" dy="2" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.15"/>
+      </feComponentTransfer>
+      <feMerge> 
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#999"/>
+    </marker>
+  </defs>
+
+  <rect width="800" height="600" fill="url(#bgGradient)"/>
+
+  <g transform="translate(400, 60)" text-anchor="middle">
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="42" font-weight="bold" fill="url(#instaGradient)">InstaTrack</text>
+    <text x="0" y="35" font-family="Arial, sans-serif" font-size="20" fill="#666">Python/Flask Instagram Follower Tracker</text>
+  </g>
+
+  <g transform="translate(250, 480)">
+    <g transform="translate(0, 0)">
+      <path d="M30 10 C30 5 45 5 45 10 L45 20 L20 20 L20 30 C20 40 30 40 30 40 L40 40 C50 40 50 30 50 30 L50 5 C50 -10 30 -10 30 5 Z" fill="#3776AB"/>
+      <path d="M30 70 C30 75 15 75 15 70 L15 60 L40 60 L40 50 C40 40 30 40 30 40 L20 40 C10 40 10 50 10 50 L10 75 C10 90 30 90 30 75 Z" fill="#FFD43B"/>
+      <text x="30" y="100" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#333" font-weight="bold">Python</text>
+      <text x="30" y="120" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#666">Data Scraping &amp; Logic</text>
+    </g>
+    <path d="M80 40 L180 40" stroke="#999" stroke-width="2" marker-end="url(#arrowhead)"/>
+    <g transform="translate(200, 0)">
+      <path d="M35 0 L55 0 L50 20 L70 60 C75 70 70 80 60 80 L30 80 C20 80 15 70 20 60 L40 20 Z" stroke="#333" stroke-width="3" fill="none"/>
+      <path d="M25 50 L65 50 L60 70 C60 75 55 75 55 75 L35 75 C35 75 30 75 30 70 Z" fill="#eee"/> <text x="45" y="100" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#333" font-weight="bold">Flask</text>
+      <text x="45" y="120" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#666">Web Server &amp; API</text>
+    </g>
+  </g>
+
+  <g transform="translate(80, 130)">
+    <rect x="0" y="0" width="640" height="300" rx="15" ry="15" fill="#fff" filter="url(#dropShadow)"/>
+    
+    <rect x="0" y="0" width="640" height="50" rx="15" ry="15" fill="#fff"/>
+    <path d="M0 40 L640 40" stroke="#eee" stroke-width="1"/>
+    <circle cx="30" cy="25" r="12" fill="url(#instaGradient)"/> <text x="55" y="30" font-family="Arial, sans-serif" font-size="16" fill="#333" font-weight="bold">@MyAwesomeBrand</text>
+    <text x="530" y="30" font-family="Arial, sans-serif" font-size="14" fill="#666">Last updated: Just now</text>
+
+    <g transform="translate(30, 70)">
+      <g>
+        <text x="0" y="0" font-family="Arial, sans-serif" font-size="18" fill="#333" font-weight="bold">Follower Growth</text>
+        <g transform="translate(0, 30)">
+          <rect x="0" y="0" width="380" height="180" fill="#f9f9f9" rx="5"/>
+          <path d="M0 45 L380 45 M0 90 L380 90 M0 135 L380 135" stroke="#eee" stroke-width="1"/>
+          <path d="M0 160 L60 140 L120 150 L180 100 L240 80 L300 40 L380 10" fill="url(#chartGradient)" stroke="none"/>
+          <path d="M0 160 L60 140 L120 150 L180 100 L240 80 L300 40 L380 10" fill="none" stroke="#2196F3" stroke-width="3"/>
+          <circle cx="380" cy="10" r="5" fill="#2196F3"/>
+          <text x="0" y="200" font-family="Arial, sans-serif" font-size="12" fill="#999">Mon</text>
+          <text x="360" y="200" font-family="Arial, sans-serif" font-size="12" fill="#999">Sun</text>
+        </g>
+      </g>
+
+      <g transform="translate(420, 0)">
+        <g>
+           <text x="0" y="0" font-family="Arial, sans-serif" font-size="14" fill="#666">Total Followers</text>
+           <text x="0" y="40" font-family="Arial, sans-serif" font-size="36" font-weight="bold" fill="#333">12,450</text>
+           <g transform="translate(0, 60)">
+             <path d="M0 10 L5 0 L10 10 Z" fill="#4CAF50"/> <text x="15" y="10" font-family="Arial, sans-serif" font-size="14" fill="#4CAF50" font-weight="bold">+125 Today</text>
+           </g>
+        </g>
+        
+        <path d="M0 90 L160 90" stroke="#eee" stroke-width="2"/>
+
+        <g transform="translate(0, 110)">
+           <text x="0" y="0" font-family="Arial, sans-serif" font-size="14" fill="#333" font-weight="bold">Recent Gains</text>
+           <g transform="translate(0, 25)">
+             <circle cx="10" cy="10" r="10" fill="#eee"/>
+             <text x="30" y="15" font-family="Arial, sans-serif" font-size="12" fill="#666">new_user_99</text>
+             <text x="130" y="15" font-family="Arial, sans-serif" font-size="12" fill="#4CAF50">+1</text>
+           </g>
+           <g transform="translate(0, 55)">
+             <circle cx="10" cy="10" r="10" fill="#eee"/>
+             <text x="30" y="15" font-family="Arial, sans-serif" font-size="12" fill="#666">photofan_ok</text>
+             <text x="130" y="15" font-family="Arial, sans-serif" font-size="12" fill="#4CAF50">+1</text>
+           </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
