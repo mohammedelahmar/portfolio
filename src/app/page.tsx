@@ -106,7 +106,11 @@ export default function Home() {
     "commands: help · clear · goto projects · whoami",
   ]);
   const [activeSection, setActiveSection] = useState<string | null>(null);
-  const [contactState, formAction] = useActionState(sendContactEmail, { status: "idle" });
+  type ActionState = { status: "idle" | "success" | "error"; message?: string };
+  const [contactState, formAction] = useActionState<ActionState, FormData>(
+    sendContactEmail,
+    { status: "idle" },
+  );
   const scrollToId = (id: string) =>
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
 

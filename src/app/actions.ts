@@ -2,15 +2,14 @@
 
 import { Resend } from "resend";
 
+type ActionState = { status: "idle" | "success" | "error"; message?: string };
+
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function sendContactEmail(
-  _prevState:
-    | { status: "idle" }
-    | { status: "success"; message: string }
-    | { status: "error"; message: string },
+  _prevState: ActionState,
   formData: FormData,
-): Promise<{ status: "idle" | "success" | "error"; message?: string }> {
+): Promise<ActionState> {
   const senderEmail = (formData.get("senderEmail") as string | null)?.trim();
   const message = (formData.get("message") as string | null)?.trim();
 
