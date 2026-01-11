@@ -275,6 +275,12 @@ export default function Home() {
               >
                 <Linkedin size={16} /> LinkedIn
               </a>
+              <a
+                href="/resume.pdf"
+                className="flex items-center gap-2 rounded-full border border-white/10 px-4 py-3 text-sm text-slate-200 transition hover:border-cyan-400/60 hover:text-white"
+              >
+                <ArrowUpRight size={16} /> CV
+              </a>
             </div>
           </motion.div>
 
