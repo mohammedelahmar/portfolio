@@ -14,8 +14,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Digital Command Center | Portfolio 2026",
-  description: "A clean-cyber, high-tech interactive portfolio.",
+  title: "Mohammed El Ahmar | MERN Stack & Security Engineer",
+  description:
+    "Portfolio of Mohammed El Ahmar — full-stack MERN and security engineer building motion-rich, resilient control-room interfaces.",
   icons: {
     icon: "/terminal-favicon.svg",
   },
