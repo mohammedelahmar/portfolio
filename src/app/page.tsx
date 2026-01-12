@@ -355,21 +355,21 @@ export default function Home() {
             </div>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <a
-                href="mailto:hello@command.center"
+                href="mailto:mohamedahmar06@gmail.com"
                 onMouseEnter={playHover}
                 className="shine inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-violet-500/80 to-emerald-500/80 px-5 py-3 text-sm font-semibold text-slate-950 transition duration-200 hover:scale-[1.01]"
               >
                 Initiate Contact <ArrowUpRight size={16} />
               </a>
               <a
-                href="https://github.com"
+                href="https://github.com/mohammedelahmar"
                 onMouseEnter={playHover}
                 className="flex items-center gap-2 rounded-full border border-white/10 px-4 py-3 text-sm text-slate-200 transition hover:border-violet-400/60 hover:text-white"
               >
                 <Github size={16} /> GitHub
               </a>
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/mohammed-el-ahmar-470516213/"
                 onMouseEnter={playHover}
                 className="flex items-center gap-2 rounded-full border border-white/10 px-4 py-3 text-sm text-slate-200 transition hover:border-emerald-400/60 hover:text-white"
               >
@@ -672,14 +672,14 @@ export default function Home() {
 
               <div className="mt-8 flex gap-4">
                 <a
-                  href="https://linkedin.com"
+                  href="https://www.linkedin.com/in/mohammed-el-ahmar-470516213/"
                   target="_blank"
                   className="flex items-center gap-2 rounded-full border border-white/10 px-5 py-3 text-sm text-slate-200 transition hover:border-emerald-400/60 hover:text-white hover:bg-white/5"
                 >
                   <Linkedin size={16} /> LinkedIn
                 </a>
                 <a
-                  href="https://github.com"
+                  href="https://github.com/mohammedelahmar"
                   target="_blank"
                   className="flex items-center gap-2 rounded-full border border-white/10 px-5 py-3 text-sm text-slate-200 transition hover:border-violet-400/60 hover:text-white hover:bg-white/5"
                 >
