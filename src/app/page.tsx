@@ -15,7 +15,7 @@ import {
   ShieldCheck,
   Terminal,
 } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 type Project = {
   title: string;
@@ -116,6 +116,31 @@ export default function Home() {
   const scrollToId = (id: string) =>
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
 
+  const audioCtxRef = useRef<AudioContext | null>(null);
+  const ensureAudio = () => {
+    if (!audioCtxRef.current) {
+      audioCtxRef.current = new AudioContext();
+    }
+    return audioCtxRef.current;
+  };
+
+  const playTone = (freq: number, duration: number, volume: number, type: OscillatorType) => {
+    const ctx = ensureAudio();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, ctx.currentTime);
+    gain.gain.setValueAtTime(volume, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+    osc.connect(gain).connect(ctx.destination);
+    osc.start();
+    osc.stop(ctx.currentTime + duration);
+  };
+
+  const playHover = () => playTone(1400, 0.05, 0.02, "sine");
+  const playEnter = () => playTone(280, 0.12, 0.05, "square");
+  const playDenied = () => playTone(110, 0.25, 0.08, "sawtooth");
+
   const displayText = useMemo(
     () => phrases[phraseIndex].slice(0, charIndex),
     [charIndex, phraseIndex],
@@ -178,6 +203,7 @@ export default function Home() {
   }, []);
 
   const handleCommand = (cmdRaw: string) => {
+    playEnter();
     const cmd = cmdRaw.trim();
     if (!cmd) return;
 
@@ -192,6 +218,7 @@ export default function Home() {
         setPasswordMode(false);
       } else {
         append([`root@mohammed:~$ *****`, "ACCESS DENIED.", "Incident reported."]);
+        playDenied();
         setPasswordMode(false);
       }
       setCommandInput("");
@@ -295,24 +322,28 @@ export default function Home() {
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <a
                 href="mailto:hello@command.center"
+                onMouseEnter={playHover}
                 className="shine inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-violet-500/80 to-emerald-500/80 px-5 py-3 text-sm font-semibold text-slate-950 transition duration-200 hover:scale-[1.01]"
               >
                 Initiate Contact <ArrowUpRight size={16} />
               </a>
               <a
                 href="https://github.com"
+                onMouseEnter={playHover}
                 className="flex items-center gap-2 rounded-full border border-white/10 px-4 py-3 text-sm text-slate-200 transition hover:border-violet-400/60 hover:text-white"
               >
                 <Github size={16} /> GitHub
               </a>
               <a
                 href="https://linkedin.com"
+                onMouseEnter={playHover}
                 className="flex items-center gap-2 rounded-full border border-white/10 px-4 py-3 text-sm text-slate-200 transition hover:border-emerald-400/60 hover:text-white"
               >
                 <Linkedin size={16} /> LinkedIn
               </a>
               <a
                 href="/resume.pdf"
+                onMouseEnter={playHover}
                 className="flex items-center gap-2 rounded-full border border-white/10 px-4 py-3 text-sm text-slate-200 transition hover:border-cyan-400/60 hover:text-white"
               >
                 <ArrowUpRight size={16} /> CV
@@ -412,6 +443,7 @@ export default function Home() {
                     layoutId={`project-${project.title}`}
                   whileHover={{ y: -6, scale: 1.01 }}
                   transition={{ type: "spring", stiffness: 260, damping: 18 }}
+                    onMouseEnter={playHover}
                     onClick={() => setSelectedProject(project)}
                   className={`${project.span} glass relative flex cursor-pointer flex-col justify-between overflow-hidden rounded-3xl p-6`}
                   style={
@@ -462,6 +494,7 @@ export default function Home() {
               id="console-terminal"
               whileHover={{ y: -4 }}
               className="col-span-12 sm:col-span-6 lg:col-span-4 glass relative overflow-hidden rounded-3xl p-5 font-mono text-sm"
+              onMouseEnter={playHover}
             >
               <div className="mb-3 flex items-center justify-between text-xs uppercase tracking-[0.18em] text-slate-300">
                 <span className="flex items-center gap-2">
@@ -502,6 +535,7 @@ export default function Home() {
             <motion.article
               whileHover={{ y: -4 }}
               className="col-span-12 sm:col-span-6 lg:col-span-3 glass relative overflow-hidden rounded-3xl p-5"
+              onMouseEnter={playHover}
             >
               <div className="flex items-center justify-between text-xs font-mono uppercase tracking-[0.18em] text-slate-300">
                 <span className="flex items-center gap-2">
@@ -520,6 +554,7 @@ export default function Home() {
             <motion.article
               whileHover={{ y: -4, scale: 1.01 }}
               className="col-span-12 sm:col-span-6 lg:col-span-5 glass relative overflow-hidden rounded-3xl p-0 photo-verify"
+              onMouseEnter={playHover}
             >
               <div className="relative h-full w-full">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(139,92,246,0.15),transparent_35%)]" />
@@ -787,6 +822,7 @@ export default function Home() {
             <button
               key={label}
               onClick={() => scrollToId(id)}
+                onMouseEnter={playHover}
               className={`flex flex-1 items-center justify-center gap-2 rounded-full px-3 py-2 transition ${
                 active ? "bg-white/15 text-white" : "hover:bg-white/10"
               }`}
