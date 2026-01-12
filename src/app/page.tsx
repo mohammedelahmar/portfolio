@@ -108,6 +108,13 @@ export default function Home() {
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const [passwordMode, setPasswordMode] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [adminInfo, setAdminInfo] = useState<{
+    ip?: string;
+    country?: string;
+    commitMessage?: string;
+    commitTimestamp?: string;
+    error?: string;
+  }>({});
   type ActionState = { status: "idle" | "success" | "error"; message?: string };
   const [contactState, formAction] = useActionState<ActionState, FormData>(
     sendContactEmail,
@@ -145,6 +152,33 @@ export default function Home() {
     () => phrases[phraseIndex].slice(0, charIndex),
     [charIndex, phraseIndex],
   );
+
+  useEffect(() => {
+    if (!isAdmin) return;
+    let mounted = true;
+    fetch("/api/admin-info", { cache: "no-store" })
+      .then(async (res) => {
+        if (!res.ok) throw new Error("Request failed");
+        return res.json();
+      })
+      .then((data) => {
+        if (!mounted) return;
+        setAdminInfo({
+          ip: data.ip,
+          country: data.country,
+          commitMessage: data.commitMessage,
+          commitTimestamp: data.commitTimestamp,
+        });
+      })
+      .catch(() => {
+        if (!mounted) return;
+        setAdminInfo({ error: "Failed to load admin telemetry" });
+      });
+
+    return () => {
+      mounted = false;
+    };
+  }, [isAdmin]);
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
@@ -213,7 +247,7 @@ export default function Home() {
     // 1. PASSWORD MODE (Hidden Input Logic)
     if (passwordMode) {
       if (cmd === "admin") {
-        append([`root@mohammed:~$ *****`, "ACCESS GRANTED.", "Loading admin modules..."]);
+  append([`root@mohammed:~$ *****`, "ACCESS GRANTED.", "Loading admin modules..."]);
         setIsAdmin(true);
         setPasswordMode(false);
       } else {
@@ -775,27 +809,48 @@ export default function Home() {
                   {/* Stat 1 */}
                   <div className="space-y-2 rounded-xl border border-red-500/20 bg-red-500/5 p-5">
                     <div className="text-xs uppercase text-red-400">System Status</div>
-                    <div className="text-2xl font-bold text-red-100">OPTIMAL</div>
+                    <div className="text-2xl font-bold text-red-100">
+                      {adminInfo.commitMessage ? "LIVE" : "OPTIMAL"}
+                    </div>
                     <div className="font-mono text-xs text-red-400/60">
-                      All security protocols active.
+                      {adminInfo.commitMessage
+                        ? "Data link established."
+                        : "All security protocols active."}
                     </div>
                   </div>
 
                   {/* Stat 2 */}
                   <div className="space-y-2 rounded-xl border border-red-500/20 bg-red-500/5 p-5">
                     <div className="text-xs uppercase text-red-400">Visitor IP</div>
-                    <div className="text-2xl font-bold text-red-100">127.0.0.1</div>
+                    <div className="text-2xl font-bold text-red-100">
+                      {adminInfo.ip || "resolving..."}
+                    </div>
                     <div className="font-mono text-xs text-red-400/60">
-                      Trace complete.
+                      {adminInfo.country ? `Country: ${adminInfo.country}` : "Trace in progress."}
                     </div>
                   </div>
 
                   {/* Stat 3 (Messages) */}
                   <div className="col-span-1 md:col-span-2 space-y-2 rounded-xl border border-red-500/20 bg-red-500/5 p-5">
                     <div className="text-xs uppercase text-red-400">Inbox</div>
-                    <div className="text-lg text-red-100">No new encrypted messages.</div>
+                    {adminInfo.error && (
+                      <div className="text-sm text-red-200">{adminInfo.error}</div>
+                    )}
+                    {!adminInfo.error && adminInfo.commitMessage && (
+                      <>
+                        <div className="text-lg text-red-100">Latest Commit: “{adminInfo.commitMessage}”</div>
+                        <div className="text-xs text-red-200/70">
+                          {adminInfo.commitTimestamp
+                            ? new Date(adminInfo.commitTimestamp).toLocaleString()
+                            : "timestamp unavailable"}
+                        </div>
+                      </>
+                    )}
+                    {!adminInfo.error && !adminInfo.commitMessage && (
+                      <div className="text-lg text-red-100">Syncing telemetry...</div>
+                    )}
                     <div className="mt-2 h-1 w-full overflow-hidden rounded-full bg-red-900/30">
-                      <div className="h-full w-[0%] bg-red-500"></div>
+                      <div className="h-full w-[40%] bg-red-500"></div>
                     </div>
                   </div>
                 </div>
