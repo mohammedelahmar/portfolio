@@ -118,7 +118,9 @@ export default function ClientPage() {
                                    width={4410}
                                    height={2700}
                                    priority
-                                   quality={100}
+                                   quality={90}
+                                   placeholder="blur"
+                                   blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAFhAJ/wlseKgAAAABJRU5ErkJggg=="
                                    className="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-[1.01]"
                               />
                          </motion.div>
