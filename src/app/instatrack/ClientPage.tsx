@@ -115,12 +115,13 @@ export default function ClientPage() {
                               <Image
                                    src="/projects/instatrack/dashboard_full.png"
                                    alt="InstaTrack Dashboard"
-                                   width={4410}
-                                   height={2700}
+                                   width={1920}
+                                   height={1176}
                                    priority
                                    quality={90}
                                    placeholder="blur"
                                    blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAFhAJ/wlseKgAAAABJRU5ErkJggg=="
+                                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1920px"
                                    className="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-[1.01]"
                               />
                          </motion.div>
