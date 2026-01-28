@@ -25,6 +25,7 @@ type Project = {
   span: string;
   detail: string;
   image?: string;
+  url?: string;
 };
 
 const phrases = [
@@ -36,14 +37,24 @@ const phrases = [
 
 const projects: Project[] = [
   {
+    title: "InstaTrack Analytics",
+    description: "Self-hosted Instagram intelligence engine with ghost follower detection and AI-powered audience queries.",
+    badge: "PYTHON // FLASK",
+    accent: "green",
+    span: "col-span-12 lg:col-span-8",
+    detail: "ghost detection · daily diff snapshots · gemini AI",
+    image: "/projects/instatrack/dashboard_full.png",
+    url: "/instatrack",
+  },
+  {
     title: "Elegance Commerce Engine",
     description:
       "Secure full-stack retail OS with JWT auth, RBAC, and realtime inventory state streaming.",
     badge: "MERN ARCHITECTURE",
     accent: "purple",
-    span: "col-span-12 lg:col-span-7 row-span-2",
+    span: "col-span-12 sm:col-span-6 lg:col-span-4 row-span-2",
     detail: "event-driven carts · rate-limited APIs · audit trails",
-  image: "/projects/elegance.svg",
+    image: "/projects/elegance.svg",
   },
   {
     title: "Social Signal Intel",
@@ -53,7 +64,7 @@ const projects: Project[] = [
     accent: "green",
     span: "col-span-12 sm:col-span-6 lg:col-span-5",
     detail: "celery workers · headless browsers · alert webhooks",
-  image: "/projects/social-signal.svg",
+    image: "/projects/social-signal.svg",
   },
   {
     title: "Optic Finance Core",
@@ -63,7 +74,7 @@ const projects: Project[] = [
     accent: "blue",
     span: "col-span-12 sm:col-span-6 lg:col-span-5",
     detail: "ocr pipeline · vector store receipts · anomaly flags",
-  image: "/projects/optic-finance.svg",
+    image: "/projects/optic-finance.svg",
   },
   {
     title: "Packet Watch / Lab Env",
@@ -73,7 +84,7 @@ const projects: Project[] = [
     accent: "red",
     span: "col-span-12 lg:col-span-7",
     detail: "fortigate sims · kali boxes · blue team drills",
-  image: "/projects/packet-watch.svg",
+    image: "/projects/packet-watch.svg",
   },
 ];
 
@@ -247,7 +258,7 @@ export default function Home() {
     // 1. PASSWORD MODE (Hidden Input Logic)
     if (passwordMode) {
       if (cmd === "admin") {
-  append([`root@mohammed:~$ *****`, "ACCESS GRANTED.", "Loading admin modules..."]);
+        append([`root@mohammed:~$ *****`, "ACCESS GRANTED.", "Loading admin modules..."]);
         setIsAdmin(true);
         setPasswordMode(false);
       } else {
@@ -413,13 +424,12 @@ export default function Home() {
                   </div>
                   <div className="h-2 w-full overflow-hidden rounded-full bg-slate-800/80">
                     <div
-                      className={`h-full rounded-full ${
-                        idx === 0
-                          ? "bg-gradient-to-r from-emerald-400 to-violet-500"
-                          : idx === 1
-                            ? "bg-gradient-to-r from-violet-500 to-blue-500"
-                            : "bg-gradient-to-r from-emerald-500 to-cyan-400"
-                      }`}
+                      className={`h-full rounded-full ${idx === 0
+                        ? "bg-gradient-to-r from-emerald-400 to-violet-500"
+                        : idx === 1
+                          ? "bg-gradient-to-r from-violet-500 to-blue-500"
+                          : "bg-gradient-to-r from-emerald-500 to-cyan-400"
+                        }`}
                       style={{ width: idx === 0 ? "78%" : idx === 1 ? "96%" : "64%" }}
                     />
                   </div>
@@ -446,174 +456,184 @@ export default function Home() {
           </div>
           <AnimatePresence>
             <div className="grid grid-cols-12 auto-rows-[200px] gap-4 lg:auto-rows-[220px]">
-            {projects.map((project) => {
-              const accentLight =
-                project.accent === "purple"
-                  ? "from-violet-600/40"
-                  : project.accent === "green"
-                    ? "from-emerald-500/40"
-                    : project.accent === "blue"
-                      ? "from-sky-400/40"
-                      : "from-rose-500/40";
-              const accentDot =
-                project.accent === "purple"
-                  ? "bg-violet-400"
-                  : project.accent === "green"
-                    ? "bg-emerald-400"
-                    : project.accent === "blue"
-                      ? "bg-sky-400"
-                      : "bg-rose-400";
-              const accentText =
-                project.accent === "purple"
-                  ? "text-violet-100"
-                  : project.accent === "green"
-                    ? "text-emerald-100"
-                    : project.accent === "blue"
-                      ? "text-sky-100"
-                      : "text-rose-100";
-              return (
-                <motion.article
-                  key={project.title}
+              {projects.map((project) => {
+                const accentLight =
+                  project.accent === "purple"
+                    ? "from-violet-600/40"
+                    : project.accent === "green"
+                      ? "from-emerald-500/40"
+                      : project.accent === "blue"
+                        ? "from-sky-400/40"
+                        : "from-rose-500/40";
+                const accentDot =
+                  project.accent === "purple"
+                    ? "bg-violet-400"
+                    : project.accent === "green"
+                      ? "bg-emerald-400"
+                      : project.accent === "blue"
+                        ? "bg-sky-400"
+                        : "bg-rose-400";
+                const accentText =
+                  project.accent === "purple"
+                    ? "text-violet-100"
+                    : project.accent === "green"
+                      ? "text-emerald-100"
+                      : project.accent === "blue"
+                        ? "text-sky-100"
+                        : "text-rose-100";
+                return (
+                  <motion.article
+                    key={project.title}
                     layoutId={`project-${project.title}`}
-                  whileHover={{ y: -6, scale: 1.01 }}
-                  transition={{ type: "spring", stiffness: 260, damping: 18 }}
+                    whileHover={{ y: -6, scale: 1.01 }}
+                    transition={{ type: "spring", stiffness: 260, damping: 18 }}
                     onMouseEnter={playHover}
                     onClick={() => setSelectedProject(project)}
-                  className={`${project.span} glass relative flex cursor-pointer flex-col justify-between overflow-hidden rounded-3xl p-6`}
-                  style={
-                    project.image
-                      ? {
+                    className={`${project.span} glass relative flex cursor-pointer flex-col justify-between overflow-hidden rounded-3xl p-6`}
+                    style={
+                      project.image
+                        ? {
                           backgroundImage: `linear-gradient(180deg, rgba(2,6,23,0.55), rgba(2,6,23,0.9)), url(${project.image})`,
                           backgroundSize: "cover",
                           backgroundPosition: "center",
                         }
-                      : undefined
-                  }
-                >
-                  <div className="flex items-center justify-between text-sm text-slate-300">
-                    <span className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em]">
-                      <span
-                        className={`h-2 w-2 rounded-full ${accentDot} shadow-[0_0_12px_rgba(124,58,237,0.6)] animate-pulse`}
-                      />
-                      {project.badge}
-                    </span>
-                    <PanelsTopLeft size={16} className="text-slate-400" />
-                  </div>
-                  <div>
-                    <h3 className={`glitch-title text-2xl font-semibold text-slate-50 ${accentText}`}>
-                      {project.title}
-                    </h3>
-                    <p className="mt-2 text-sm text-slate-300/90">{project.description}</p>
-                  </div>
-                  <div className="flex items-center justify-between text-sm text-slate-200">
-                    <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-[11px] uppercase tracking-wide">
-                      {project.detail}
-                    </span>
-                    <motion.button
-                      whileHover={{ x: 4 }}
-                      className="flex items-center gap-1 text-emerald-200/90"
-                    >
-                      open <ArrowUpRight size={14} />
-                    </motion.button>
-                  </div>
-                  <div
-                    className={`pointer-events-none absolute inset-0 opacity-50 blur-3xl bg-gradient-to-br ${accentLight} via-transparent to-slate-900`}
-                  />
-                  <div className="pointer-events-none absolute inset-0 border border-white/5" />
-                </motion.article>
-              );
-            })}
-
-            <motion.article
-              id="console-terminal"
-              whileHover={{ y: -4 }}
-              className="col-span-12 sm:col-span-6 lg:col-span-4 glass relative overflow-hidden rounded-3xl p-5 font-mono text-sm"
-              onMouseEnter={playHover}
-            >
-              <div className="mb-3 flex items-center justify-between text-xs uppercase tracking-[0.18em] text-slate-300">
-                <span className="flex items-center gap-2">
-                  <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-400" />
-                  terminal
-                </span>
-                <Terminal size={14} className="text-slate-400" />
-              </div>
-              <div className="rounded-2xl border border-white/10 bg-black/70 px-4 py-3 text-emerald-100 shadow-inner">
-                <div className="flex flex-col gap-1">
-                  {commandHistory.map((line, idx) => (
-                    <div key={`${line}-${idx}`} className="text-xs text-emerald-100/90">
-                      {line}
+                        : undefined
+                    }
+                  >
+                    <div className="flex items-center justify-between text-sm text-slate-300">
+                      <span className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em]">
+                        <span
+                          className={`h-2 w-2 rounded-full ${accentDot} shadow-[0_0_12px_rgba(124,58,237,0.6)] animate-pulse`}
+                        />
+                        {project.badge}
+                      </span>
+                      <PanelsTopLeft size={16} className="text-slate-400" />
                     </div>
-                  ))}
-                  <div className="flex items-center gap-2 text-xs text-emerald-100">
-                    <span className="text-emerald-400">{">"}</span>
-                    <input
-                      value={commandInput}
-                      type={passwordMode ? "password" : "text"}
-                      onChange={(e) => setCommandInput(e.target.value)}
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter") {
-                          e.preventDefault();
-                          handleCommand(commandInput);
-                        }
-                      }}
-                      className="w-full bg-transparent text-emerald-100 outline-none placeholder:text-emerald-700"
-                      placeholder={passwordMode ? "password..." : "type a command (help)"}
-                      autoComplete="off"
-                      aria-label="terminal input"
+                    <div>
+                      <h3 className={`glitch-title text-2xl font-semibold text-slate-50 ${accentText}`}>
+                        {project.title}
+                      </h3>
+                      <p className="mt-2 text-sm text-slate-300/90">{project.description}</p>
+                    </div>
+                    <div className="flex items-center justify-between text-sm text-slate-200">
+                      <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-[11px] uppercase tracking-wide">
+                        {project.detail}
+                      </span>
+                      <motion.div
+                        whileHover={{ x: 4 }}
+                        className="flex items-center gap-1 text-emerald-200/90"
+                      >
+                        {project.url ? (
+                          <a
+                            href={project.url}
+                            onClick={(e) => e.stopPropagation()}
+                            className="flex items-center gap-1 hover:text-white transition-colors"
+                          >
+                            details <ArrowUpRight size={14} />
+                          </a>
+                        ) : (
+                          <span className="flex items-center gap-1">open <ArrowUpRight size={14} /></span>
+                        )}
+                      </motion.div>
+                    </div>
+                    <div
+                      className={`pointer-events-none absolute inset-0 opacity-50 blur-3xl bg-gradient-to-br ${accentLight} via-transparent to-slate-900`}
                     />
-                  </div>
-                </div>
-              </div>
-            </motion.article>
+                    <div className="pointer-events-none absolute inset-0 border border-white/5" />
+                  </motion.article>
+                );
+              })}
 
-            <motion.article
-              whileHover={{ y: -4 }}
-              className="col-span-12 sm:col-span-6 lg:col-span-3 glass relative overflow-hidden rounded-3xl p-5"
-              onMouseEnter={playHover}
-            >
-              <div className="flex items-center justify-between text-xs font-mono uppercase tracking-[0.18em] text-slate-300">
-                <span className="flex items-center gap-2">
-                  <span className="h-2 w-2 animate-pulse rounded-full bg-amber-400" />
-                  certification
-                </span>
-                <ShieldCheck size={14} className="text-amber-300" />
-              </div>
-              <div className="mt-4 grid gap-2 rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-slate-100">
-                <div className="font-mono text-xs uppercase tracking-[0.2em] text-slate-300">prep</div>
-                <div className="text-lg font-semibold">Certified Ethical Hacker</div>
-                <div className="text-xs text-slate-300">focus: spring security · network defense · blue team drills</div>
-              </div>
-            </motion.article>
-
-            <motion.article
-              whileHover={{ y: -4, scale: 1.01 }}
-              className="col-span-12 sm:col-span-6 lg:col-span-5 glass relative overflow-hidden rounded-3xl p-0 photo-verify"
-              onMouseEnter={playHover}
-            >
-              <div className="relative h-full w-full">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(139,92,246,0.15),transparent_35%)]" />
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_10%,rgba(16,185,129,0.12),transparent_35%)]" />
-                <Image
-                  src="/profile-bw.svg"
-                  alt="Mohammed El Ahmar"
-                  fill
-                  sizes="(min-width: 1024px) 25vw, 45vw"
-                  className="object-cover opacity-70 transition duration-300 hover:opacity-100 grayscale hover:grayscale-0"
-                  priority
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
-                <div className="absolute bottom-0 left-0 w-full p-5">
-                  <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-emerald-300">
-                    operator: online
-                  </div>
-                  <div className="text-xl font-semibold text-white">Mohammed El Ahmar</div>
-                  <div className="mt-1 flex items-center gap-2 text-xs text-slate-200">
+              <motion.article
+                id="console-terminal"
+                whileHover={{ y: -4 }}
+                className="col-span-12 sm:col-span-6 lg:col-span-4 glass relative overflow-hidden rounded-3xl p-5 font-mono text-sm"
+                onMouseEnter={playHover}
+              >
+                <div className="mb-3 flex items-center justify-between text-xs uppercase tracking-[0.18em] text-slate-300">
+                  <span className="flex items-center gap-2">
                     <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-400" />
-                    security id badge
+                    terminal
+                  </span>
+                  <Terminal size={14} className="text-slate-400" />
+                </div>
+                <div className="rounded-2xl border border-white/10 bg-black/70 px-4 py-3 text-emerald-100 shadow-inner">
+                  <div className="flex flex-col gap-1">
+                    {commandHistory.map((line, idx) => (
+                      <div key={`${line}-${idx}`} className="text-xs text-emerald-100/90">
+                        {line}
+                      </div>
+                    ))}
+                    <div className="flex items-center gap-2 text-xs text-emerald-100">
+                      <span className="text-emerald-400">{">"}</span>
+                      <input
+                        value={commandInput}
+                        type={passwordMode ? "password" : "text"}
+                        onChange={(e) => setCommandInput(e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") {
+                            e.preventDefault();
+                            handleCommand(commandInput);
+                          }
+                        }}
+                        className="w-full bg-transparent text-emerald-100 outline-none placeholder:text-emerald-700"
+                        placeholder={passwordMode ? "password..." : "type a command (help)"}
+                        autoComplete="off"
+                        aria-label="terminal input"
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
-            </motion.article>
+              </motion.article>
+
+              <motion.article
+                whileHover={{ y: -4 }}
+                className="col-span-12 sm:col-span-6 lg:col-span-3 glass relative overflow-hidden rounded-3xl p-5"
+                onMouseEnter={playHover}
+              >
+                <div className="flex items-center justify-between text-xs font-mono uppercase tracking-[0.18em] text-slate-300">
+                  <span className="flex items-center gap-2">
+                    <span className="h-2 w-2 animate-pulse rounded-full bg-amber-400" />
+                    certification
+                  </span>
+                  <ShieldCheck size={14} className="text-amber-300" />
+                </div>
+                <div className="mt-4 grid gap-2 rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-slate-100">
+                  <div className="font-mono text-xs uppercase tracking-[0.2em] text-slate-300">prep</div>
+                  <div className="text-lg font-semibold">Certified Ethical Hacker</div>
+                  <div className="text-xs text-slate-300">focus: spring security · network defense · blue team drills</div>
+                </div>
+              </motion.article>
+
+              <motion.article
+                whileHover={{ y: -4, scale: 1.01 }}
+                className="col-span-12 sm:col-span-6 lg:col-span-5 glass relative overflow-hidden rounded-3xl p-0 photo-verify"
+                onMouseEnter={playHover}
+              >
+                <div className="relative h-full w-full">
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(139,92,246,0.15),transparent_35%)]" />
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_10%,rgba(16,185,129,0.12),transparent_35%)]" />
+                  <Image
+                    src="/profile-bw.svg"
+                    alt="Mohammed El Ahmar"
+                    fill
+                    sizes="(min-width: 1024px) 25vw, 45vw"
+                    className="object-cover opacity-70 transition duration-300 hover:opacity-100 grayscale hover:grayscale-0"
+                    priority
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
+                  <div className="absolute bottom-0 left-0 w-full p-5">
+                    <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-emerald-300">
+                      operator: online
+                    </div>
+                    <div className="text-xl font-semibold text-white">Mohammed El Ahmar</div>
+                    <div className="mt-1 flex items-center gap-2 text-xs text-slate-200">
+                      <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-400" />
+                      security id badge
+                    </div>
+                  </div>
+                </div>
+              </motion.article>
             </div>
           </AnimatePresence>
         </section>
@@ -748,6 +768,17 @@ export default function Home() {
                 {selectedProject.title}
               </h3>
               <p className="mt-3 text-slate-300/90">{selectedProject.description}</p>
+
+              {selectedProject.url && (
+                <div className="mt-6">
+                  <a
+                    href={selectedProject.url}
+                    className="inline-flex items-center gap-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 px-6 py-3 text-sm font-semibold text-emerald-400 transition hover:bg-emerald-500/20 hover:scale-[1.02]"
+                  >
+                    Initialize Full Briefing <ArrowUpRight size={16} />
+                  </a>
+                </div>
+              )}
               <div className="mt-4 flex flex-wrap gap-3 text-sm">
                 <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-[11px] uppercase tracking-wide">
                   {selectedProject.detail}
@@ -877,10 +908,9 @@ export default function Home() {
             <button
               key={label}
               onClick={() => scrollToId(id)}
-                onMouseEnter={playHover}
-              className={`flex flex-1 items-center justify-center gap-2 rounded-full px-3 py-2 transition ${
-                active ? "bg-white/15 text-white" : "hover:bg-white/10"
-              }`}
+              onMouseEnter={playHover}
+              className={`flex flex-1 items-center justify-center gap-2 rounded-full px-3 py-2 transition ${active ? "bg-white/15 text-white" : "hover:bg-white/10"
+                }`}
             >
               <Icon size={16} />
               <span className="hidden sm:inline">{label}</span>
