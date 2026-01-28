@@ -52,11 +52,16 @@ export default function ClientPage() {
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
                />
 
-               {/* Dynamic Background */}
-               <div className="fixed inset-0 pointer-events-none">
-                    <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-emerald-500/10 rounded-full blur-[120px]" />
-                    <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-violet-600/10 rounded-full blur-[120px]" />
-                    <div className="noise" />
+               {/* Dynamic Background - MOBILE OPTIMIZED */}
+               <div className="fixed inset-0 pointer-events-none overflow-hidden">
+                    {/* 1. Green Glow (Top Left) - Visible on Mobile (Safe Blur) */}
+                    <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] bg-emerald-500/10 rounded-full blur-[60px] md:blur-[120px]" />
+
+                    {/* 2. Purple Glow (Bottom Right) - Visible on Mobile (Safe Blur) */}
+                    <div className="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] bg-violet-600/10 rounded-full blur-[60px] md:blur-[120px]" />
+
+                    {/* 3. The Noise Texture - HIDDEN ON MOBILE (This stops the crash) */}
+                    <div className="noise hidden md:block" />
                </div>
 
                <nav className="relative z-50 flex items-center justify-between px-6 py-6 md:px-12 max-w-7xl mx-auto">
