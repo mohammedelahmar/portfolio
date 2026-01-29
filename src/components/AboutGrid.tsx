@@ -12,6 +12,8 @@ export default function AboutGrid({
      handleCommand,
      commandHistory,
      passwordMode,
+     navigateHistory,
+     autocomplete,
 }: {
      playHover: () => void;
      commandInput: string;
@@ -19,6 +21,8 @@ export default function AboutGrid({
      handleCommand: (c: string) => void;
      commandHistory: string[];
      passwordMode: boolean;
+     navigateHistory: (direction: "up" | "down") => void;
+     autocomplete: () => void;
 }) {
      return (
           <section id="console" className="grid grid-cols-1 md:grid-cols-12 gap-4 auto-rows-[220px]">
@@ -54,6 +58,15 @@ export default function AboutGrid({
                                              if (e.key === "Enter") {
                                                   e.preventDefault();
                                                   handleCommand(commandInput);
+                                             } else if (e.key === "ArrowUp") {
+                                                  e.preventDefault();
+                                                  navigateHistory("up");
+                                             } else if (e.key === "ArrowDown") {
+                                                  e.preventDefault();
+                                                  navigateHistory("down");
+                                             } else if (e.key === "Tab") {
+                                                  e.preventDefault();
+                                                  autocomplete();
                                              }
                                         }}
                                         className="w-full bg-transparent text-emerald-100 outline-none placeholder:text-emerald-700"
