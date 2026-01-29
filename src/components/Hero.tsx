@@ -51,10 +51,10 @@ export default function Hero({ playHover }: { playHover: () => void }) {
                >
                     <div className="flex items-center gap-3 text-xs uppercase tracking-[0.2em] text-slate-300">
                          <span className="h-[1px] w-8 bg-gradient-to-r from-transparent via-violet-400 to-transparent" />
-                         Digital Command Center
+                         Security & Full Stack Engineer
                     </div>
                     <h1 className="mt-4 text-4xl font-semibold leading-tight text-slate-50 sm:text-5xl lg:text-6xl min-h-[3.6em] sm:min-h-[2.4em]">
-                         Clean Cyber, <br className="hidden sm:block" />
+                         Building Secure, <br className="hidden sm:block" />
                          <span className="text-emerald-400">
                               {displayText}
                               <span className="animate-pulse">_</span>
@@ -70,7 +70,7 @@ export default function Hero({ playHover }: { playHover: () => void }) {
                               onMouseEnter={playHover}
                               className="shine inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-violet-500/80 to-emerald-500/80 px-5 py-3 text-sm font-semibold text-slate-950 transition duration-200 hover:scale-[1.01]"
                          >
-                              Initiate Contact <ArrowUpRight size={16} />
+                              Contact Me <ArrowUpRight size={16} />
                          </a>
                          <a
                               href="https://github.com/mohammedelahmar"

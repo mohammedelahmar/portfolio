@@ -20,12 +20,12 @@ export default function Contact() {
                <div className="flex flex-col gap-8 lg:flex-row">
                     <div className="lg:w-1/2">
                          <p className="text-xs font-mono uppercase tracking-[0.28em] text-slate-400">
-                              contact protocol
+                              Get in Touch
                          </p>
-                         <h3 className="mt-2 text-3xl font-semibold">Ready to sync?</h3>
+                         <h3 className="mt-2 text-3xl font-semibold">Let's Connect</h3>
                          <p className="mt-4 text-slate-300/90 leading-relaxed">
-                              Drop a line for collabs, security labs, or interface builds. <br />Response SLA:
-                              &lt; 12h.
+                              Drop a line for collabs, security labs, or interface builds. <br />
+                              I typically respond within 12 hours.
                          </p>
 
                          <div className="mt-8 flex gap-4">
@@ -60,14 +60,14 @@ export default function Contact() {
                               name="message"
                               required
                               rows={4}
-                              placeholder="Enter encrypted message..."
+                              placeholder="Enter your message..."
                               className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-500 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/50"
                          />
                          <button
                               type="submit"
                               className="shine mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-emerald-500 to-violet-600 px-6 py-3 text-sm font-semibold text-white transition hover:scale-[1.02]"
                          >
-                              Transmit Data <ArrowUpRight size={16} />
+                              Send Message <ArrowUpRight size={16} />
                          </button>
                          {contactState.status === "success" && (
                               <div className="text-sm text-emerald-300">{contactState.message}</div>

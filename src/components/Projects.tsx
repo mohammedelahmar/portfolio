@@ -25,7 +25,7 @@ export default function Projects({
           <section id="projects" className="space-y-6">
                <div className="flex items-center gap-2 text-xs uppercase tracking-[0.28em] text-slate-300">
                     <span className="h-[1px] w-8 bg-gradient-to-r from-transparent via-emerald-400 to-transparent" />
-                    Projects Grid
+                    Featured Projects
                </div>
 
                {/* Simplified Grid: Responsive 1 cols -> 2 cols -> 3 cols */}
@@ -140,8 +140,8 @@ export default function Projects({
 
                                    <div className="flex items-center gap-3 text-xs font-mono uppercase tracking-[0.2em] text-slate-300 mb-6">
                                         <span className={`h-2 w-2 rounded-full animate-pulse ${selectedProject.accent === "purple" ? "bg-violet-400" :
-                                                  selectedProject.accent === "green" ? "bg-emerald-400" :
-                                                       selectedProject.accent === "blue" ? "bg-sky-400" : "bg-rose-400"
+                                             selectedProject.accent === "green" ? "bg-emerald-400" :
+                                                  selectedProject.accent === "blue" ? "bg-sky-400" : "bg-rose-400"
                                              }`} />
                                         {selectedProject.badge}
                                    </div>
@@ -191,7 +191,7 @@ export default function Projects({
                                                   rel="noopener noreferrer"
                                                   className="inline-flex items-center gap-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 px-8 py-3 text-sm font-semibold text-emerald-400 transition hover:bg-emerald-500/20 hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(16,185,129,0.2)]"
                                              >
-                                                  Initialize Full Briefing <ArrowUpRight size={16} />
+                                                  View Project Details <ArrowUpRight size={16} />
                                              </a>
                                         </div>
                                    )}

@@ -9,6 +9,7 @@ import Projects from "@/components/Projects";
 import Skills from "@/components/Skills";
 import Stack from "@/components/Stack";
 import AboutGrid from "@/components/AboutGrid";
+import Footer from "@/components/Footer";
 import { useAudio } from "@/hooks/useAudio";
 import { useTerminal } from "@/hooks/useTerminal";
 
@@ -91,6 +92,7 @@ export default function Home() {
         <Skills />
         <Stack />
         <Contact />
+        <Footer />
       </main>
     </div>
   );
