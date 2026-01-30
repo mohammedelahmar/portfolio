@@ -26,7 +26,7 @@ export const projects: Project[] = [
     accent: "green",
     span: "col-span-12 lg:col-span-8",
     detail: "ghost detection · daily diff snapshots · selenium automation",
-    image: "/projects/instatrack/dashboard_full.png", 
+    image: "/projects/instatrack/dashboard_full.png",
     url: "/instatrack",
   },
   {
@@ -48,7 +48,7 @@ export const projects: Project[] = [
     accent: "blue",
     span: "col-span-12 sm:col-span-6 lg:col-span-5",
     detail: "vite · mongodb · express · node.js · geospatial data",
-    image: "/projects/topomap.svg", 
+    image: "/projects/topomap.svg",
     url: "https://github.com/mohammedelahmar/topomap",
   },
   {
@@ -59,8 +59,8 @@ export const projects: Project[] = [
     accent: "red",
     span: "col-span-12 sm:col-span-6 lg:col-span-5",
     detail: "tesseract.js · chart.js · mern stack · finance ops",
-    image: "/projects/expense-tracker.svg",
-    url: "https://github.com/mohammedelahmar/expense-tracker",
+    image: "/projects/ExpenseTracker/Dashboard.png",
+    url: "/expense-tracker",
   },
   {
     title: "ClubHub Systems",
