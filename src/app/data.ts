@@ -1,3 +1,5 @@
+import { Cpu, Globe, Server, Shield } from "lucide-react";
+
 export type Project = {
   title: string;
   description: string;
@@ -39,21 +41,21 @@ export const projects: Project[] = [
     url: "https://github.com/mohammedelahmar/elegance-shop",
   },
   {
-    title: "LyrisFlow",
+    title: "TopoMap",
     description:
       "Topography visualization platform designed for complex data rendering and interactive mapping.",
-    badge: "DATA VISUALIZATION",
+    badge: "MERN // VITE",
     accent: "blue",
     span: "col-span-12 sm:col-span-6 lg:col-span-5",
-    detail: "react · d3.js · interactive mapping · ui/ux",
-    image: "/projects/lyrisflow.svg", 
-    url: "https://github.com/mohammedelahmar/lyrisflow",
+    detail: "vite · mongodb · express · node.js · geospatial data",
+    image: "/projects/topomap.svg", 
+    url: "https://github.com/mohammedelahmar/topomap",
   },
   {
-    title: "ExpenseTracker OCR",
+    title: "ExpenseTracker ",
     description:
       "Financial management system integrating OCR technology to automatically scan and log receipts.",
-    badge: "FINTECH AI",
+    badge: "MERN STACK",
     accent: "red",
     span: "col-span-12 sm:col-span-6 lg:col-span-5",
     detail: "tesseract.js · chart.js · mern stack · finance ops",
@@ -64,7 +66,7 @@ export const projects: Project[] = [
     title: "ClubHub Systems",
     description:
       "Comprehensive management system for university clubs, handling member rosters, events, and access control.",
-    badge: "SPRING BOOT",
+    badge: "HTML/CSS/JS",
     accent: "blue",
     span: "col-span-12 lg:col-span-7",
     detail: "java spring security · mysql · mvc pattern · role management",
@@ -83,7 +85,6 @@ export const techStack = [
   "Python",
   "Flask",
   "MongoDB",
-  "PostgreSQL",
   "Docker",
   "Linux",
   "FortiGate",
@@ -92,26 +93,40 @@ export const techStack = [
 
 export const experience = [
   {
-    role: "Software Engineer Intern",
-    company: "VPI Info",
-    period: "2024 - 2025",
-    description: "Contributed to enterprise-level software solutions, focusing on backend optimization and database management. Assisted in migrating legacy systems to modern web architectures.",
-    skills: ["Java", "SQL", "System Design", "Agile"],
+    role: "Student - Bachelor GIGD",
+    company: "École Supérieure de Technologie",
+    period: "Present",
+    description: "Focusing on advanced backend logic and system architecture. Currently mastering Python, Advanced SQL, Design Patterns, and Entrepreneurship.",
+    skills: ["Python", "Advanced SQL", "UML", "Design Patterns"],
   },
   {
-    role: "Computer Science Student",
-    company: "Université Ibn Tofail (UIT)",
-    period: "Present",
-    description: "Specializing in Cybersecurity and Software Engineering. deeply involved in red team drills, network defense, and secure coding practices.",
-    skills: ["Network Security", "Cryptography", "Algorithms", "Python"],
+    role: "Internship - Full-Stack Mapping App",
+    company: "Geomatics Engineering SARL",
+    period: "2025",
+    description: "Engineered 'TopoMap', a full-stack mapping solution using Vite, MongoDB, Express, and Node.js. Handled complex geospatial data rendering and backend performance.",
+    skills: ["Vite", "MongoDB", "Express", "Node.js"],
+  },
+  {
+    role: "DUT in Génie Informatique",
+    company: "École Supérieure de Technologie",
+    period: "2025", // Graduation Year
+    description: "Completed comprehensive 2-year training in Algorithms, System Exploitation, Cryptography, and Advanced Databases. Mastered C, C++, Java, and JS.",
+    skills: ["C/C++", "Java", "System Exploitation", "Cryptography"],
+  },
+  {
+    role: "Internship - IT Systems",
+    company: "VPI INFO",
+    period: "2023 - 2024",
+    description: "Developed 'ClubHub' project while managing IT infrastructure. Gained deep proficiency in Git/GitHub, Linux Command Line, and core web technologies (HTML/CSS/JS).",
+    skills: ["Git/GitHub", "Linux CMD", "ClubHub Project", "Web Core"],
   },
 ];
 
 export const skillsData = [
-  { subject: "MERN Stack", A: 135, fullMark: 150 },
+  { subject: "MERN / Vite", A: 140, fullMark: 150 },
   { subject: "Java / Spring", A: 130, fullMark: 150 },
-  { subject: "Network Security", A: 120, fullMark: 150 },
-  { subject: "Python / Scripting", A: 140, fullMark: 150 },
-  { subject: "DevOps / Linux", A: 110, fullMark: 150 },
-  { subject: "UI / UX Design", A: 100, fullMark: 150 },
+  { subject: "System Security", A: 125, fullMark: 150 },
+  { subject: "Python / Scripting", A: 135, fullMark: 150 },
+  { subject: "Algorithms / C++", A: 120, fullMark: 150 },
+  { subject: "SQL / Databases", A: 130, fullMark: 150 },
 ];
