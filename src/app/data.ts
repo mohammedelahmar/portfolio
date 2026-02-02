@@ -37,8 +37,8 @@ export const projects: Project[] = [
     accent: "purple",
     span: "col-span-12 sm:col-span-6 lg:col-span-4 row-span-2",
     detail: "redux toolkit · stripe integration · admin dashboard",
-    image: "/projects/elegance.svg",
-    url: "https://github.com/mohammedelahmar/elegance-shop",
+    image: "/projects/EleganceShop/Home.png",
+    url: "/elegance-shop",
   },
   {
     title: "TopoMap",
