@@ -20,6 +20,17 @@ export const phrases = [
 
 export const projects: Project[] = [
   {
+    title: "TikTok Agent",
+    description:
+      "Automated viral clip extractor using AI motion analysis and smart framing to convert landscape video to portrait.",
+    badge: "PYTHON // REACT",
+    accent: "purple",
+    span: "col-span-12 lg:col-span-8",
+    detail: "mediapipe · opencv · ffmpeg · gemini ai",
+    image: "/projects/TiktokAgent/HomePage.png",
+    url: "/tiktok-agent",
+  },
+  {
     title: "InstaTrack Analytics",
     description: "Self-hosted Instagram intelligence engine with ghost follower detection and AI-powered audience queries.",
     badge: "PYTHON // FLASK",
