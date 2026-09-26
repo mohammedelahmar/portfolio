@@ -1,106 +1,144 @@
-
-
 export type Project = {
   title: string;
   description: string;
   badge: string;
   accent: "purple" | "green" | "blue" | "red";
-  span: string;
   detail: string;
   image?: string;
   url?: string;
+  github?: string;
 };
 
+// --- Hero ---
+
 export const phrases = [
-  "Security-First Developer",
-  "MERN Stack Architect",
-  "Spring Boot Engineer",
-  "Designing resilient systems",
+  "Cybersecurity & Full Stack",
+  "Engineering Student — GCIAC",
+  "Building Secure Systems",
+  "Security × AI × Code",
 ];
+
+export const portfolioMetrics = [
+  { label: "Featured Projects", value: "06" },
+  { label: "Years Engineering Studies", value: "03" },
+  { label: "Internships Completed", value: "02" },
+  { label: "Engineering Specialization", value: "01" },
+];
+
+// --- Projects (ordered by strategic importance) ---
 
 export const projects: Project[] = [
   {
-    title: "TikTok Agent",
+    title: "ExpenseTracker",
     description:
-      "Automated viral clip extractor using AI motion analysis and smart framing to convert landscape video to portrait.",
-    badge: "PYTHON // REACT",
-    accent: "purple",
-    span: "col-span-12 lg:col-span-8",
-    detail: "mediapipe · opencv · ffmpeg · gemini ai",
-    image: "/projects/TiktokAgent/HomePage.png",
-    url: "/tiktok-agent",
+      "Full-stack financial management system integrating OCR technology to automatically scan receipts, track expenses, and visualize spending analytics.",
+    badge: "MERN STACK",
+    accent: "red",
+    detail: "tesseract.js · chart.js · authentication · finance ops",
+    image: "/projects/ExpenseTracker/Dashboard.png",
+    url: "/expense-tracker",
+    github: "https://github.com/mohammedelahmar/Expense-Tracker",
   },
   {
     title: "InstaTrack Analytics",
-    description: "Self-hosted Instagram intelligence engine with ghost follower detection and AI-powered audience queries.",
+    description:
+      "Self-hosted Instagram intelligence engine with ghost follower detection, daily diff snapshots, and AI-powered audience queries.",
     badge: "PYTHON // FLASK",
     accent: "green",
-    span: "col-span-12 lg:col-span-8",
-    detail: "ghost detection · daily diff snapshots · selenium automation",
+    detail: "ghost detection · selenium · data analysis · mongodb",
     image: "/projects/instatrack/dashboard_full.png",
     url: "/instatrack",
-  },
-  {
-    title: "Elegance Commerce",
-    description:
-      "Secure full-stack retail OS with JWT auth, RBAC, and realtime inventory state streaming.",
-    badge: "MERN STACK",
-    accent: "purple",
-    span: "col-span-12 sm:col-span-6 lg:col-span-4 row-span-2",
-    detail: "redux toolkit · stripe integration · admin dashboard",
-    image: "/projects/EleganceShop/Home.png",
-    url: "/elegance-shop",
+    github: "https://github.com/mohammedelahmar/InstaTrack",
   },
   {
     title: "TopoMap",
     description:
-      "Topography visualization platform designed for complex data rendering and interactive mapping.",
+      "Full-stack web mapping application for visualizing geospatial data. Built during internship at Geomatics Engineering SARL.",
     badge: "MERN // VITE",
     accent: "blue",
-    span: "col-span-12 sm:col-span-6 lg:col-span-5",
-    detail: "vite · mongodb · express · node.js · geospatial data",
+    detail: "vite · react · express · mongodb · geospatial",
     image: "/projects/topomap.svg",
     url: "https://github.com/mohammedelahmar/topomap",
+    github: "https://github.com/mohammedelahmar/topomap",
   },
   {
-    title: "ExpenseTracker ",
+    title: "Elegance Commerce",
     description:
-      "Financial management system integrating OCR technology to automatically scan and log receipts.",
+      "Secure full-stack retail platform with JWT authentication, role-based access control, and integrated payment processing.",
     badge: "MERN STACK",
-    accent: "red",
-    span: "col-span-12 sm:col-span-6 lg:col-span-5",
-    detail: "tesseract.js · chart.js · mern stack · finance ops",
-    image: "/projects/ExpenseTracker/Dashboard.png",
-    url: "/expense-tracker",
+    accent: "purple",
+    detail: "redux toolkit · jwt · rbac · admin dashboard",
+    image: "/projects/EleganceShop/Home.png",
+    url: "/elegance-shop",
+    github: "https://github.com/mohammedelahmar/elegance-shop",
   },
   {
-    title: "ClubHub Systems",
+    title: "TikTok Agent",
     description:
-      "Comprehensive management system for university clubs, handling member rosters, events, and access control.",
-    badge: "HTML/CSS/JS",
+      "AI-powered viral clip extractor using motion analysis and smart framing to convert landscape video to portrait format.",
+    badge: "PYTHON // REACT",
+    accent: "purple",
+    detail: "mediapipe · opencv · ffmpeg · gemini ai",
+    image: "/projects/TiktokAgent/HomePage.png",
+    url: "/tiktok-agent",
+    github: "https://github.com/mohammedelahmar/tiktok-agent",
+  },
+  {
+    title: "ClubHub",
+    description:
+      "University club management system handling member rosters, events, and role-based access control.",
+    badge: "JAVA // SPRING",
     accent: "blue",
-    span: "col-span-12 lg:col-span-7",
-    detail: "java spring security · mysql · mvc pattern · role management",
+    detail: "spring security · mysql · mvc · role management",
     image: "/projects/clubhub.svg",
     url: "https://github.com/mohammedelahmar/clubhub",
+    github: "https://github.com/mohammedelahmar/clubhub",
   },
 ];
 
-export const techStack = [
-  "Next.js 16",
-  "React 19",
-  "TypeScript",
-  "Tailwind CSS",
-  "Spring Boot",
-  "Java",
-  "Python",
-  "Flask",
-  "MongoDB",
-  "Docker",
-  "Linux",
-  "FortiGate",
-  "Git",
+// --- Technical Focus (replaces percentage-based skills) ---
+
+export const technicalFocus = [
+  { area: "Full-Stack Development", icon: "layers" },
+  { area: "Cybersecurity", icon: "shield" },
+  { area: "Python & Automation", icon: "terminal" },
+  { area: "Backend Engineering", icon: "server" },
+  { area: "Databases", icon: "database" },
+  { area: "Linux & Systems", icon: "monitor" },
+  { area: "Artificial Intelligence", icon: "brain" },
+  { area: "Networking", icon: "network" },
 ];
+
+// --- Tech Stack (categorized) ---
+
+export const techStackFoundation = [
+  "JavaScript", "React", "Node.js", "Express",
+  "MongoDB", "SQL", "Java", "Python", "Git", "Linux",
+];
+
+export const techStackGrowing = [
+  "Cybersecurity", "Artificial Intelligence", "Docker",
+  "Spring Boot", "TypeScript", "Next.js", "Tailwind CSS", "Networking",
+];
+
+// --- Currently Learning ---
+
+export const currentlyLearning = [
+  {
+    category: "Cybersecurity",
+    items: ["Web Security", "Network Security", "Linux Security", "OWASP", "Security Testing"],
+  },
+  {
+    category: "Artificial Intelligence",
+    items: ["Machine Learning", "Computer Vision", "AI-powered Applications"],
+  },
+  {
+    category: "Engineering",
+    items: ["Secure Software Architecture", "Docker", "Advanced Backend Development"],
+  },
+];
+
+// --- Experience ---
 
 export const experience = [
   {
@@ -138,13 +176,4 @@ export const experience = [
     description: "Completed an introductory IT internship involving web development and technical support. Worked on the ClubHub project while gaining practical experience with Linux, Git/GitHub, and core web technologies.",
     skills: ["Git/GitHub", "Linux CLI", "HTML/CSS/JavaScript", "IT Support"],
   },
-];
-
-export const skillsData = [
-  { subject: "MERN / Vite", A: 140, fullMark: 150 },
-  { subject: "Java / Spring", A: 130, fullMark: 150 },
-  { subject: "System Security", A: 125, fullMark: 150 },
-  { subject: "Python / Scripting", A: 135, fullMark: 150 },
-  { subject: "Algorithms / C++", A: 120, fullMark: 150 },
-  { subject: "SQL / Databases", A: 130, fullMark: 150 },
 ];

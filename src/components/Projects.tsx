@@ -98,11 +98,24 @@ export default function Projects({
 
                                    <div className="flex items-center justify-between text-sm text-slate-200 relative z-10 pt-4 border-t border-white/5 mt-4">
                                         <span className="rounded-full border border-white/10 bg-white/5 px-2 py-1 font-mono text-[10px] uppercase tracking-wide opacity-80">
-                                             {project.detail.split("·")[0]} {/* First tag only for cleanliness */}
+                                             {project.detail.split("·")[0]}
                                         </span>
-                                        <div className="flex items-center gap-1 text-emerald-200/90 group-hover:text-emerald-400 transition-colors">
-                                             <span className="text-xs font-semibold">ACCESS</span>
-                                             <ArrowUpRight size={14} />
+                                        <div className="flex items-center gap-3">
+                                             {project.github && (
+                                                  <a
+                                                       href={project.github}
+                                                       target="_blank"
+                                                       rel="noopener noreferrer"
+                                                       onClick={(e) => e.stopPropagation()}
+                                                       className="text-xs font-mono text-slate-400 hover:text-white transition-colors"
+                                                  >
+                                                       GitHub
+                                                  </a>
+                                             )}
+                                             <div className="flex items-center gap-1 text-emerald-200/90 group-hover:text-emerald-400 transition-colors">
+                                                  <span className="text-xs font-semibold">VIEW</span>
+                                                  <ArrowUpRight size={14} />
+                                             </div>
                                         </div>
                                    </div>
 
@@ -183,18 +196,28 @@ export default function Projects({
                                         </div>
                                    </div>
 
-                                   {selectedProject.url && (
-                                        <div className="flex justify-end">
+                                   <div className="flex flex-wrap justify-end gap-3">
+                                        {selectedProject.github && (
+                                             <a
+                                                  href={selectedProject.github}
+                                                  target="_blank"
+                                                  rel="noopener noreferrer"
+                                                  className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-6 py-3 text-sm font-semibold text-slate-300 transition hover:border-violet-400/40 hover:text-white"
+                                             >
+                                                  GitHub <ArrowUpRight size={16} />
+                                             </a>
+                                        )}
+                                        {selectedProject.url && (
                                              <a
                                                   href={selectedProject.url}
                                                   target="_blank"
                                                   rel="noopener noreferrer"
-                                                  className="inline-flex items-center gap-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 px-8 py-3 text-sm font-semibold text-emerald-400 transition hover:bg-emerald-500/20 hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(16,185,129,0.2)]"
+                                                  className="inline-flex items-center gap-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 px-6 py-3 text-sm font-semibold text-emerald-400 transition hover:bg-emerald-500/20 hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(16,185,129,0.2)]"
                                              >
-                                                  View Project Details <ArrowUpRight size={16} />
+                                                  View Details <ArrowUpRight size={16} />
                                              </a>
-                                        </div>
-                                   )}
+                                        )}
+                                   </div>
                               </motion.div>
                          </motion.div>
                     )}

@@ -17,12 +17,12 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://elahmar.dev"),
-  title: "Mohammed El Ahmar | MERN Stack & Security Engineer",
+  title: "Mohammed El Ahmar | Cybersecurity & Full Stack Engineer",
   description:
-    "Portfolio of Mohammed El Ahmar — full-stack MERN and security engineer building motion-rich, resilient control-room interfaces.",
+    "Portfolio of Mohammed El Ahmar — cybersecurity & AI engineering student building secure full-stack applications and intelligent systems.",
   openGraph: {
-    title: "Mohammed El Ahmar | Digital Command Center",
-    description: "Interactive Security & Full Stack Portfolio",
+    title: "Mohammed El Ahmar | Cybersecurity & Full Stack",
+    description: "Cybersecurity & AI Engineering Student Portfolio",
     url: "https://elahmar.dev",
     siteName: "Mohammed El Ahmar",
     images: [

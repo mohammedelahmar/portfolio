@@ -94,9 +94,9 @@ export default function AboutGrid({
                          <ShieldCheck size={14} className="text-amber-300" />
                     </div>
                     <div className="mt-2 grid gap-2 rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-slate-100 flex-1">
-                         <div className="font-mono text-xs uppercase tracking-[0.2em] text-slate-300">prep</div>
+                         <div className="font-mono text-xs uppercase tracking-[0.2em] text-amber-400">CEH — Preparation</div>
                          <div className="text-lg font-semibold">Certified Ethical Hacker</div>
-                         <div className="text-xs text-slate-300 mt-auto">focus: spring security · network defense · blue team drills</div>
+                         <div className="text-xs text-slate-300/70 mt-auto">Currently preparing for certification</div>
                     </div>
                </motion.article>
 

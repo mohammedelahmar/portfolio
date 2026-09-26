@@ -8,6 +8,7 @@ import MatrixBackground from "@/components/MatrixBackground";
 import Projects from "@/components/Projects";
 import Skills from "@/components/Skills";
 import Stack from "@/components/Stack";
+import CurrentlyLearning from "@/components/CurrentlyLearning";
 import AboutGrid from "@/components/AboutGrid";
 import Footer from "@/components/Footer";
 import { useAudio } from "@/hooks/useAudio";
@@ -17,7 +18,6 @@ export default function ClientHome() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [activeSection, setActiveSection] = useState<string | null>(null);
 
-  // Custom Hooks
   const { playHover, playEnter, playDenied } = useAudio();
 
   const {
@@ -41,7 +41,7 @@ export default function ClientHome() {
   }, []);
 
   useEffect(() => {
-    const sectionIds = ["console", "projects", "stack", "contact", "experience", "skills"];
+    const sectionIds = ["console", "skills", "projects", "experience", "stack", "learning", "contact"];
     const observer = new IntersectionObserver(
       (entries) => {
         const visible = entries
@@ -85,12 +85,11 @@ export default function ClientHome() {
           navigateHistory={navigateHistory}
           autocomplete={autocomplete}
         />
-        <Projects
-          playHover={playHover}
-        />
-        <Experience />
         <Skills />
+        <Projects playHover={playHover} />
+        <Experience />
         <Stack />
+        <CurrentlyLearning />
         <Contact />
         <Footer />
       </main>

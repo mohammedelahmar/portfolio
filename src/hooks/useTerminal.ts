@@ -94,7 +94,7 @@ export function useTerminal(playEnter: () => void, playDenied: () => void) {
                          document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
                          break;
                     case "goto skills":
-                         appendHistory([`user@mohammed:~$ ${cmdRaw}`, "navigating -> skills"]);
+                         appendHistory([`user@mohammed:~$ ${cmdRaw}`, "navigating -> technical focus"]);
                          document.getElementById("skills")?.scrollIntoView({ behavior: "smooth" });
                          break;
                     case "goto experience":
@@ -108,7 +108,10 @@ export function useTerminal(playEnter: () => void, playDenied: () => void) {
                     case "whoami":
                          appendHistory([
                               `user@mohammed:~$ ${cmdRaw}`,
-                              "security-focused engineer · red/blue crossover · builds control-room UIs",
+                              "Mohammed El Ahmar",
+                              "Cybersecurity & Full Stack Engineer",
+                              "Engineering Student — GCIAC @ INNIA",
+                              "Focus: Cybersecurity · AI · Full-Stack · Secure Systems",
                          ]);
                          break;
                     case "toggle matrix":
