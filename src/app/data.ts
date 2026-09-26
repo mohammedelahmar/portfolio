@@ -1,4 +1,4 @@
-import { Cpu, Globe, Server, Shield } from "lucide-react";
+
 
 export type Project = {
   title: string;
@@ -87,7 +87,7 @@ export const projects: Project[] = [
 ];
 
 export const techStack = [
-  "Next.js 15",
+  "Next.js 16",
   "React 19",
   "TypeScript",
   "Tailwind CSS",
@@ -104,32 +104,39 @@ export const techStack = [
 
 export const experience = [
   {
-    role: "Student - Bachelor GIGD",
-    company: "École Supérieure de Technologie",
-    period: "Present",
-    description: "Focusing on advanced backend logic and system architecture. Currently mastering Python, Advanced SQL, Design Patterns, and Entrepreneurship.",
-    skills: ["Python", "Advanced SQL", "UML", "Design Patterns"],
+    role: "Engineering Student — Cybersecurity & AI (GCIAC)",
+    company: "Institut National du Numérique et de l'Intelligence Artificielle (INNIA), Settat",
+    period: "2026 – Present",
+    description: "Pursuing an Engineering degree in Génie Cybersécurité et Intelligence Artificielle (GCIAC), developing practical skills across cybersecurity, artificial intelligence, secure systems, networks, and software engineering.",
+    skills: ["Cybersecurity", "Artificial Intelligence", "Python", "Network Security", "Systems"],
   },
   {
-    role: "Internship - Full-Stack Mapping App",
-    company: "Geomatics Engineering SARL",
+    role: "Bachelor — Génie Informatique & Gouvernance Digitale (GIGD)",
+    company: "École Supérieure de Technologie de Kénitra — Université Ibn Tofaïl",
+    period: "2025 – 2026",
+    description: "Completed a Bachelor's degree specializing in software engineering, information systems, system administration, cybersecurity, and digital governance, with practical experience in web development and database systems.",
+    skills: ["Full-Stack Development", "SQL", "System Administration", "Cybersecurity", "UML"],
+  },
+  {
+    role: "Internship — Full-Stack GIS Developer",
+    company: "GEOMATICS ENGINEERING SARL",
     period: "2025",
-    description: "Engineered 'TopoMap', a full-stack mapping solution using Vite, MongoDB, Express, and Node.js. Handled complex geospatial data rendering and backend performance.",
-    skills: ["Vite", "MongoDB", "Express", "Node.js"],
+    description: "Engineered TopoMap, a full-stack web mapping application for visualizing and working with geospatial data. Implemented the frontend, backend APIs, authentication, and database integration using a modern JavaScript stack.",
+    skills: ["Vite", "React", "Node.js", "Express", "MongoDB", "Geospatial Data"],
   },
   {
-    role: "DUT in Génie Informatique",
-    company: "École Supérieure de Technologie",
-    period: "2025", // Graduation Year
-    description: "Completed comprehensive 2-year training in Algorithms, System Exploitation, Cryptography, and Advanced Databases. Mastered C, C++, Java, and JS.",
-    skills: ["C/C++", "Java", "System Exploitation", "Cryptography"],
+    role: "DUT — Génie Informatique",
+    company: "École Supérieure de Technologie de Kénitra — Université Ibn Tofaïl",
+    period: "2023 – 2025",
+    description: "Completed a two-year DUT in Génie Informatique, covering algorithms, object-oriented programming, databases, operating systems, computer networks, web development, system administration, and cybersecurity fundamentals.",
+    skills: ["C/C++", "Java", "JavaScript", "SQL", "Linux", "Networks"],
   },
   {
-    role: "Internship - IT Systems",
+    role: "Internship — IT Systems & Web",
     company: "VPI INFO",
-    period: "2023 - 2024",
-    description: "Developed 'ClubHub' project while managing IT infrastructure. Gained deep proficiency in Git/GitHub, Linux Command Line, and core web technologies (HTML/CSS/JS).",
-    skills: ["Git/GitHub", "Linux CMD", "ClubHub Project", "Web Core"],
+    period: "2024",
+    description: "Completed an introductory IT internship involving web development and technical support. Worked on the ClubHub project while gaining practical experience with Linux, Git/GitHub, and core web technologies.",
+    skills: ["Git/GitHub", "Linux CLI", "HTML/CSS/JavaScript", "IT Support"],
   },
 ];
 

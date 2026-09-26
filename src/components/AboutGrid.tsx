@@ -33,6 +33,7 @@ export default function AboutGrid({
                     whileHover={{ y: -4 }}
                     className="col-span-12 md:col-span-6 lg:col-span-4 glass relative overflow-hidden rounded-3xl p-5 font-mono text-sm flex flex-col"
                     onMouseEnter={playHover}
+                    aria-label="Interactive terminal emulator"
                >
                     <div className="mb-3 flex items-center justify-between text-xs uppercase tracking-[0.18em] text-slate-300">
                          <span className="flex items-center gap-2">
@@ -42,14 +43,14 @@ export default function AboutGrid({
                          <Terminal size={14} className="text-slate-400" />
                     </div>
                     <div className="flex-1 rounded-2xl border border-white/10 bg-black/70 px-4 py-3 text-emerald-100 shadow-inner overflow-hidden flex flex-col">
-                         <div className="flex-1 flex flex-col justify-end gap-1 overflow-y-auto scrollbar-hide">
+                         <div className="flex-1 flex flex-col justify-end gap-1 overflow-y-auto scrollbar-hide" role="log" aria-live="polite" aria-label="Terminal output">
                               {commandHistory.slice(-6).map((line, idx) => (
                                    <div key={`${line}-${idx}`} className="text-xs text-emerald-100/90 break-all">
                                         {line}
                                    </div>
                               ))}
                               <div className="flex items-center gap-2 text-xs text-emerald-100 mt-1">
-                                   <span className="text-emerald-400">{">"}</span>
+                                   <span className="text-emerald-400" role="status" aria-label="Terminal prompt">{">"}</span>
                                    <input
                                         value={commandInput}
                                         type={passwordMode ? "password" : "text"}
@@ -110,10 +111,11 @@ export default function AboutGrid({
                          <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_10%,rgba(16,185,129,0.12),transparent_35%)]" />
                          {/* Using a solid color placeholder if image fails, but sticking to design */}
                          <Image
-                              src="/profile-bw.svg"
+                              src="/profile-bw.png"
                               alt="Mohammed El Ahmar"
                               fill
                               sizes="(min-width: 1024px) 25vw, 45vw"
+                              quality={75}
                               className="object-cover opacity-70 transition duration-300 hover:opacity-100 grayscale hover:grayscale-0"
                               priority
                          />

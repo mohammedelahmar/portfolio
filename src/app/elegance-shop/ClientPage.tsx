@@ -131,19 +131,25 @@ export default function ClientPage() {
                                    icon: <LayoutDashboard size={24} className="text-pink-400" />,
                                    title: "Admin Command Center",
                                    desc: "Full CRUD capabilities for products, users, and orders. Visual statistics and inventory management.",
-                                   color: "pink",
+                                   bg: "bg-pink-500/10",
+                                   border: "border-pink-500/20",
+                                   hover: "group-hover:bg-pink-500/20",
                               },
                               {
                                    icon: <CreditCard size={24} className="text-amber-400" />,
                                    title: "Secure Checkout",
                                    desc: "Integrated PayPal & Stripe gateways with multi-step address verification and order summarization.",
-                                   color: "amber",
+                                   bg: "bg-amber-500/10",
+                                   border: "border-amber-500/20",
+                                   hover: "group-hover:bg-amber-500/20",
                               },
                               {
                                    icon: <Lock size={24} className="text-violet-400" />,
                                    title: "RBAC Security",
                                    desc: "JWT-based authentication with distinct role guards (Admin vs. Shopper) protecting API routes.",
-                                   color: "violet",
+                                   bg: "bg-violet-500/10",
+                                   border: "border-violet-500/20",
+                                   hover: "group-hover:bg-violet-500/20",
                               },
                          ].map((item, i) => (
                               <motion.div
@@ -154,7 +160,7 @@ export default function ClientPage() {
                                    transition={{ delay: i * 0.1 }}
                                    className="p-8 rounded-3xl bg-white/5 border border-white/5 hover:border-white/10 transition-colors backdrop-blur-md group"
                               >
-                                   <div className={`w-12 h-12 rounded-2xl bg-${item.color}-500/10 flex items-center justify-center mb-6 border border-${item.color}-500/20 group-hover:bg-${item.color}-500/20 transition-colors`}>
+                                   <div className={`w-12 h-12 rounded-2xl ${item.bg} flex items-center justify-center mb-6 border ${item.border} ${item.hover} transition-colors`}>
                                         {item.icon}
                                    </div>
                                    <h3 className="text-xl font-semibold text-slate-100 mb-3">{item.title}</h3>

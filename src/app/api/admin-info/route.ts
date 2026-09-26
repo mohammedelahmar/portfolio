@@ -1,5 +1,20 @@
 import { headers } from "next/headers";
 
+/**
+ * Admin Info API Route — GET /api/admin-info
+ *
+ * Returns operational context used by the interactive terminal's admin mode.
+ * Accessed after a successful `sudo login` in the portfolio's terminal widget.
+ *
+ * Response shape:
+ *   - ip:              The visitor's forwarded IP address
+ *   - country:         Geo-IP country code (via Vercel/Cloudflare headers)
+ *   - commitMessage:   The latest GitHub commit message for this repo
+ *   - commitTimestamp:  ISO timestamp of the latest commit
+ *
+ * No authentication is enforced — the data is non-sensitive and public.
+ */
+
 const OWNER = "mohammedelahmar";
 const REPO = "portfolio";
 
