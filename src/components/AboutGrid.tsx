@@ -25,13 +25,13 @@ export default function AboutGrid({
      autocomplete: () => void;
 }) {
      return (
-          <section id="console" className="grid grid-cols-1 md:grid-cols-12 gap-4 auto-rows-[220px]">
+          <section id="console" className="grid grid-cols-1 md:grid-cols-12 gap-4">
 
                {/* TERMINAL WIDGET */}
                <motion.article
                     id="console-terminal"
                     whileHover={{ y: -4 }}
-                    className="col-span-12 md:col-span-6 lg:col-span-4 glass relative overflow-hidden rounded-3xl p-5 font-mono text-sm flex flex-col"
+                    className="col-span-12 md:col-span-6 lg:col-span-4 glass relative overflow-hidden rounded-3xl p-5 font-mono text-sm flex flex-col min-h-[300px]"
                     onMouseEnter={playHover}
                     aria-label="Interactive terminal emulator"
                >
@@ -83,7 +83,7 @@ export default function AboutGrid({
                {/* CERTIFICATION WIDGET */}
                <motion.article
                     whileHover={{ y: -4 }}
-                    className="col-span-12 md:col-span-6 lg:col-span-3 glass relative overflow-hidden rounded-3xl p-5 flex flex-col justify-between"
+                    className="col-span-12 md:col-span-6 lg:col-span-4 glass relative overflow-hidden rounded-3xl p-5 flex flex-col justify-between min-h-[300px]"
                     onMouseEnter={playHover}
                >
                     <div className="flex items-center justify-between text-xs font-mono uppercase tracking-[0.18em] text-slate-300">
@@ -103,20 +103,19 @@ export default function AboutGrid({
                {/* PROFILE PHOTO WIDGET */}
                <motion.article
                     whileHover={{ y: -4, scale: 1.01 }}
-                    className="col-span-12 lg:col-span-5 glass relative overflow-hidden rounded-3xl p-0 photo-verify min-h-[220px]"
+                    className="col-span-12 md:col-span-12 lg:col-span-4 aspect-square max-w-[380px] w-full mx-auto lg:mx-0 glass relative overflow-hidden rounded-3xl p-0 photo-verify"
                     onMouseEnter={playHover}
                >
                     <div className="relative h-full w-full">
                          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(139,92,246,0.15),transparent_35%)]" />
                          <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_10%,rgba(16,185,129,0.12),transparent_35%)]" />
-                         {/* Using a solid color placeholder if image fails, but sticking to design */}
                          <Image
                               src="/profile-bw.png"
                               alt="Mohammed El Ahmar"
                               fill
-                              sizes="(min-width: 1024px) 25vw, 45vw"
-                              quality={75}
-                              className="object-cover opacity-70 transition duration-300 hover:opacity-100 grayscale hover:grayscale-0"
+                              sizes="(min-width: 1024px) 380px, (min-width: 768px) 50vw, 100vw"
+                              quality={95}
+                              className="object-cover opacity-90 transition duration-300 hover:opacity-100 grayscale hover:grayscale-0"
                               priority
                          />
                          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
