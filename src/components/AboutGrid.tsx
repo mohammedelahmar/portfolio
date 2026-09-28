@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ShieldCheck, Terminal } from "lucide-react";
+import { Terminal } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 
@@ -31,7 +31,7 @@ export default function AboutGrid({
                <motion.article
                     id="console-terminal"
                     whileHover={{ y: -4 }}
-                    className="col-span-12 md:col-span-6 lg:col-span-4 glass relative overflow-hidden rounded-3xl p-5 font-mono text-sm flex flex-col min-h-[300px]"
+                    className="col-span-12 md:col-span-7 lg:col-span-8 glass relative overflow-hidden rounded-3xl p-5 font-mono text-sm flex flex-col min-h-[340px]"
                     onMouseEnter={playHover}
                     aria-label="Interactive terminal emulator"
                >
@@ -44,7 +44,7 @@ export default function AboutGrid({
                     </div>
                     <div className="flex-1 rounded-2xl border border-white/10 bg-black/70 px-4 py-3 text-emerald-100 shadow-inner overflow-hidden flex flex-col">
                          <div className="flex-1 flex flex-col justify-end gap-1 overflow-y-auto scrollbar-hide" role="log" aria-live="polite" aria-label="Terminal output">
-                              {commandHistory.slice(-6).map((line, idx) => (
+                              {commandHistory.slice(-8).map((line, idx) => (
                                    <div key={`${line}-${idx}`} className="text-xs text-emerald-100/90 break-all">
                                         {line}
                                    </div>
@@ -80,30 +80,10 @@ export default function AboutGrid({
                     </div>
                </motion.article>
 
-               {/* CERTIFICATION WIDGET */}
-               <motion.article
-                    whileHover={{ y: -4 }}
-                    className="col-span-12 md:col-span-6 lg:col-span-4 glass relative overflow-hidden rounded-3xl p-5 flex flex-col justify-between min-h-[300px]"
-                    onMouseEnter={playHover}
-               >
-                    <div className="flex items-center justify-between text-xs font-mono uppercase tracking-[0.18em] text-slate-300">
-                         <span className="flex items-center gap-2">
-                              <span className="h-2 w-2 animate-pulse rounded-full bg-amber-400" />
-                              certification
-                         </span>
-                         <ShieldCheck size={14} className="text-amber-300" />
-                    </div>
-                    <div className="mt-2 grid gap-2 rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-slate-100 flex-1">
-                         <div className="font-mono text-xs uppercase tracking-[0.2em] text-amber-400">CEH — Preparation</div>
-                         <div className="text-lg font-semibold">Certified Ethical Hacker</div>
-                         <div className="text-xs text-slate-300/70 mt-auto">Currently preparing for certification</div>
-                    </div>
-               </motion.article>
-
                {/* PROFILE PHOTO WIDGET */}
                <motion.article
                     whileHover={{ y: -4, scale: 1.01 }}
-                    className="col-span-12 md:col-span-12 lg:col-span-4 aspect-square max-w-[380px] w-full mx-auto lg:mx-0 glass relative overflow-hidden rounded-3xl p-0 photo-verify"
+                    className="col-span-12 md:col-span-5 lg:col-span-4 aspect-square max-w-[380px] w-full mx-auto md:mx-0 glass relative overflow-hidden rounded-3xl p-0 photo-verify"
                     onMouseEnter={playHover}
                >
                     <div className="relative h-full w-full">

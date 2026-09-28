@@ -20,7 +20,7 @@ export const phrases = [
 
 export const portfolioMetrics = [
   { label: "Featured Projects", value: "06" },
-  { label: "Years Engineering Studies", value: "03" },
+  { label: "Years of Software Engineering Studies", value: "03" },
   { label: "Internships Completed", value: "02" },
   { label: "Engineering Specialization", value: "01" },
 ];
