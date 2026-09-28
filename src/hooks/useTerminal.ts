@@ -1,200 +1,294 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback } from "react";
 
-type TerminalState = {
-     input: string;
-     history: string[];
-     historyIndex: number; // -1 means executing new command, >= 0 means browsing history
-     passwordMode: boolean;
-     isAdmin: boolean;
-     matrixEnabled: boolean;
-};
+// ── MOTD / Initial terminal session ──────────────────────────────────
+const INITIAL_HISTORY = [
+  "MOHAMMED@ELAHMAR",
+  "────────────────────────────────────────",
+  "SYSTEM    GCIAC @ INNIA Settat",
+  "ROLE      Cybersecurity & Full-Stack Engineer",
+  "STATUS    ● ONLINE",
+  "FOCUS     Cybersecurity · AI · Backend",
+  "────────────────────────────────────────",
+  "06 Projects  ·  02 Internships  ·  01 Specialization",
+  "",
+  "[SYSTEM READY] Interactive shell initialized.",
+  "",
+  "user@mohammed:~$ help",
+  "commands: help · whoami · projects · skills · certs · cv · clear · goto [section]",
+];
 
+// ── Autocomplete targets ─────────────────────────────────────────────
 const COMMANDS = [
-     "help",
-     "clear",
-     "goto projects",
-     "goto skills",
-     "goto experience",
-     "whoami",
-     "download cv",
-     "sudo login",
-     "login admin",
-     "toggle matrix",
-     "logout",
+  "help",
+  "clear",
+  "whoami",
+  "projects",
+  "skills",
+  "certs",
+  "cv",
+  "download cv",
+  "goto projects",
+  "goto skills",
+  "goto experience",
+  "goto stack",
+  "goto learning",
+  "goto contact",
+  "sudo login",
+  "login admin",
+  "toggle matrix",
+  "logout",
 ];
 
 export function useTerminal(playEnter: () => void, playDenied: () => void) {
-     const [input, setInput] = useState("");
-     const [history, setHistory] = useState<string[]>([
-          "user@mohammed:~$ help",
-          "commands: help · clear · goto projects · whoami · download cv · sudo login",
-     ]);
-     const [historyIndex, setHistoryIndex] = useState(-1);
-     const [passwordMode, setPasswordMode] = useState(false);
-     const [isAdmin, setIsAdmin] = useState(false);
-     const [matrixEnabled, setMatrixEnabled] = useState(true);
+  const [input, setInput] = useState("");
+  const [history, setHistory] = useState<string[]>(INITIAL_HISTORY);
+  const [historyIndex, setHistoryIndex] = useState(-1);
+  const [passwordMode, setPasswordMode] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [matrixEnabled, setMatrixEnabled] = useState(true);
 
-     const appendHistory = useCallback((lines: string[]) => {
-          setHistory((prev) => [...prev, ...lines].slice(-50));
-     }, []);
+  const appendHistory = useCallback((lines: string[]) => {
+    setHistory((prev) => [...prev, ...lines].slice(-60));
+  }, []);
 
-     const executeCommand = useCallback(
-          (cmdRaw: string) => {
-               playEnter();
-               const cmd = cmdRaw.trim();
-               if (!cmd) return;
+  const executeCommand = useCallback(
+    (cmdRaw: string) => {
+      playEnter();
+      const cmd = cmdRaw.trim();
+      if (!cmd) return;
 
-               // Reset history index when executing new command
-               setHistoryIndex(-1);
+      setHistoryIndex(-1);
 
-               // Save command to history for navigation (filter out empty or duplicates if desired, but standard shell keeps all)
-               // We don't save passwords
-               if (!passwordMode) {
-                    // We'll rely on the visual history for navigation for now, but usually shells have a separate history buffer
-                    // Let's implement a separate "command buffer" for navigation if we want it perfect, 
-                    // but re-using visual history lines that start with "user@..." is parsing heavy.
-                    // Simplified: push to a hidden command history? 
-                    // For this specific UI, the "history" state IS the visual log.
-                    // Let's keep it simple: we will just match what was typed.
-               }
+      // ── PASSWORD MODE ──
+      if (passwordMode) {
+        if (cmd === "admin") {
+          appendHistory([
+            "root@mohammed:~$ *****",
+            "ACCESS GRANTED.",
+            "Loading admin modules...",
+          ]);
+          setIsAdmin(true);
+          setPasswordMode(false);
+        } else {
+          appendHistory([
+            "root@mohammed:~$ *****",
+            "ACCESS DENIED.",
+            "Nice try. 😎",
+          ]);
+          playDenied();
+          setPasswordMode(false);
+        }
+        setInput("");
+        return;
+      }
 
-               // 1. PASSWORD MODE
-               if (passwordMode) {
-                    if (cmd === "admin") {
-                         appendHistory([`root@mohammed:~$ *****`, "ACCESS GRANTED.", "Loading admin modules..."]);
-                         setIsAdmin(true);
-                         setPasswordMode(false);
-                    } else {
-                         appendHistory([`root@mohammed:~$ *****`, "ACCESS DENIED.", "Incident reported."]);
-                         playDenied();
-                         setPasswordMode(false);
-                    }
-                    setInput("");
-                    return;
-               }
+      // ── STANDARD COMMANDS ──
+      const lowerCmd = cmd.toLowerCase();
 
-               // 2. STANDARD COMMAND MODE
-               const lowerCmd = cmd.toLowerCase();
+      switch (lowerCmd) {
+        // ── help ──
+        case "help":
+          appendHistory([
+            `user@mohammed:~$ ${cmdRaw}`,
+            "commands: help · whoami · projects · skills · certs · cv · clear · goto [section]",
+          ]);
+          break;
 
-               // Basic "navigation" history - we'll just store the raw command in a hidden way if we want full shell feel, 
-               // but for now let's just process the command.
+        // ── clear ──
+        case "clear":
+          setHistory([]);
+          break;
 
-               switch (lowerCmd) {
-                    case "help":
-                         appendHistory([
-                              `user@mohammed:~$ ${cmdRaw}`,
-                              "commands: help · clear · goto [section] · whoami · download cv · sudo login · toggle matrix",
-                         ]);
-                         break;
-                    case "clear":
-                         setHistory([]);
-                         break;
-                    case "goto projects":
-                         appendHistory([`user@mohammed:~$ ${cmdRaw}`, "navigating -> projects"]);
-                         document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
-                         break;
-                    case "goto skills":
-                         appendHistory([`user@mohammed:~$ ${cmdRaw}`, "navigating -> technical focus"]);
-                         document.getElementById("skills")?.scrollIntoView({ behavior: "smooth" });
-                         break;
-                    case "goto experience":
-                         appendHistory([`user@mohammed:~$ ${cmdRaw}`, "navigating -> experience"]);
-                         document.getElementById("experience")?.scrollIntoView({ behavior: "smooth" });
-                         break;
-                    case "download cv":
-                         appendHistory([`user@mohammed:~$ ${cmdRaw}`, "opening resume.pdf"]);
-                         window.open("/resume.pdf", "_blank");
-                         break;
-                    case "whoami":
-                         appendHistory([
-                              `user@mohammed:~$ ${cmdRaw}`,
-                              "Mohammed El Ahmar",
-                              "Cybersecurity & Full Stack Engineer",
-                              "Engineering Student — GCIAC @ INNIA",
-                              "Focus: Cybersecurity · AI · Full-Stack · Secure Systems",
-                         ]);
-                         break;
-                    case "toggle matrix":
-                         setMatrixEnabled((prev) => !prev);
-                         appendHistory([
-                              `user@mohammed:~$ ${cmdRaw}`,
-                              `Matrix effect: ${!matrixEnabled ? "ON" : "OFF"}`,
-                         ]);
-                         break;
-                    case "sudo login":
-                    case "login admin":
-                         appendHistory([`user@mohammed:~$ ${cmdRaw}`, "Enter root password:"]);
-                         setPasswordMode(true);
-                         break;
-                    case "logout":
-                         if (isAdmin) {
-                              setIsAdmin(false);
-                              appendHistory([`user@mohammed:~$ ${cmdRaw}`, "Session terminated."]);
-                         } else {
-                              appendHistory([`user@mohammed:~$ ${cmdRaw}`, "You are not logged in."]);
-                         }
-                         break;
-                    default:
-                         appendHistory([`user@mohammed:~$ ${cmdRaw}`, "command not found. try 'help'"]);
-               }
-               setInput("");
-          },
-          [passwordMode, matrixEnabled, isAdmin, playEnter, playDenied, appendHistory]
-     );
+        // ── whoami ──
+        case "whoami":
+          appendHistory([
+            `user@mohammed:~$ ${cmdRaw}`,
+            "",
+            "Mohammed El Ahmar",
+            "Cybersecurity & Full-Stack Engineer",
+            "Engineering Student — GCIAC @ INNIA Settat",
+            "",
+            "FOCUS",
+            "→ Cybersecurity",
+            "→ Artificial Intelligence",
+            "→ Secure Software Engineering",
+            "→ Full-Stack Development",
+          ]);
+          break;
 
-     // Command Navigation Logic
-     // We need a separate history of typed commands for Up/Down arrow navigation
-     const [cmdStack, setCmdStack] = useState<string[]>([]);
+        // ── projects ──
+        case "projects":
+          appendHistory([
+            `user@mohammed:~$ ${cmdRaw}`,
+            "",
+            "FEATURED PROJECTS",
+            "01  ExpenseTracker      MERN Stack",
+            "02  InstaTrack          Python / Flask",
+            "03  TopoMap             MERN / GIS",
+            "04  Elegance Commerce   MERN Stack",
+            "05  TikTok Agent        Python / React",
+            "06  ClubHub             Java / Spring",
+            "",
+            'Type "goto projects" to view details.',
+          ]);
+          break;
 
-     // Wrap execute to save to stack
-     const handleCommand = (cmd: string) => {
-          if (!passwordMode && cmd.trim()) {
-               setCmdStack(prev => [...prev, cmd]);
-          }
-          executeCommand(cmd);
-          setHistoryIndex(-1);
-     };
+        // ── skills ──
+        case "skills":
+          appendHistory([
+            `user@mohammed:~$ ${cmdRaw}`,
+            "",
+            "LANGUAGES",
+            "Python · Java · JavaScript · C/C++ · SQL",
+            "",
+            "FULL-STACK",
+            "React · Node.js · Express · MongoDB",
+            "",
+            "SECURITY",
+            "Web Security · Network Security · Linux · OWASP",
+            "",
+            "AI",
+            "Machine Learning · Computer Vision",
+          ]);
+          break;
 
-     const navigateHistory = (direction: "up" | "down") => {
-          if (cmdStack.length === 0) return;
+        // ── certs ──
+        case "certs":
+          appendHistory([
+            `user@mohammed:~$ ${cmdRaw}`,
+            "",
+            "CERTIFICATIONS",
+            "",
+            "[ IN PROGRESS ]",
+            "CEH — Certified Ethical Hacker",
+            "Currently preparing",
+          ]);
+          break;
 
-          let newIndex = historyIndex;
-          if (direction === "up") {
-               if (newIndex === -1) {
-                    newIndex = cmdStack.length - 1;
-               } else {
-                    newIndex = Math.max(0, newIndex - 1);
-               }
+        // ── cv ──
+        case "cv":
+        case "download cv":
+          appendHistory([
+            `user@mohammed:~$ ${cmdRaw}`,
+            "Opening Mohammed El Ahmar — CV...",
+          ]);
+          window.open("/resume.pdf", "_blank");
+          break;
+
+        // ── goto navigation ──
+        case "goto projects":
+          appendHistory([`user@mohammed:~$ ${cmdRaw}`, "navigating -> projects"]);
+          document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
+          break;
+        case "goto skills":
+          appendHistory([`user@mohammed:~$ ${cmdRaw}`, "navigating -> technical focus"]);
+          document.getElementById("skills")?.scrollIntoView({ behavior: "smooth" });
+          break;
+        case "goto experience":
+          appendHistory([`user@mohammed:~$ ${cmdRaw}`, "navigating -> experience"]);
+          document.getElementById("experience")?.scrollIntoView({ behavior: "smooth" });
+          break;
+        case "goto stack":
+          appendHistory([`user@mohammed:~$ ${cmdRaw}`, "navigating -> tech stack"]);
+          document.getElementById("stack")?.scrollIntoView({ behavior: "smooth" });
+          break;
+        case "goto learning":
+          appendHistory([`user@mohammed:~$ ${cmdRaw}`, "navigating -> currently learning"]);
+          document.getElementById("learning")?.scrollIntoView({ behavior: "smooth" });
+          break;
+        case "goto contact":
+          appendHistory([`user@mohammed:~$ ${cmdRaw}`, "navigating -> contact"]);
+          document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+          break;
+
+        // ── easter egg ──
+        case "sudo login":
+        case "login admin":
+          appendHistory([
+            `user@mohammed:~$ ${cmdRaw}`,
+            "[sudo] authentication required...",
+          ]);
+          setPasswordMode(true);
+          break;
+
+        // ── toggle matrix ──
+        case "toggle matrix":
+          setMatrixEnabled((prev) => !prev);
+          appendHistory([
+            `user@mohammed:~$ ${cmdRaw}`,
+            `Matrix effect: ${!matrixEnabled ? "ON" : "OFF"}`,
+          ]);
+          break;
+
+        // ── logout ──
+        case "logout":
+          if (isAdmin) {
+            setIsAdmin(false);
+            appendHistory([`user@mohammed:~$ ${cmdRaw}`, "Session terminated."]);
           } else {
-               if (newIndex === -1) return; // already at bottom
-               newIndex = Math.min(cmdStack.length - 1, newIndex + 1);
+            appendHistory([`user@mohammed:~$ ${cmdRaw}`, "You are not logged in."]);
           }
+          break;
 
-          setHistoryIndex(newIndex);
-          // If we moved "down" past the last item, clear input (like a real shell)
-          // Actually real shell restores the "current draft". For simplicity, let's just go blank if we go past end?
-          // Or just clamp at end. 
-          // Let's clamp at end for now. 
-          setInput(cmdStack[newIndex]);
-     };
+        // ── unknown ──
+        default:
+          appendHistory([
+            `user@mohammed:~$ ${cmdRaw}`,
+            `command not found: ${cmdRaw}. Type "help" for available commands.`,
+          ]);
+      }
+      setInput("");
+    },
+    [passwordMode, matrixEnabled, isAdmin, playEnter, playDenied, appendHistory],
+  );
 
-     const autocomplete = () => {
-          if (!input.trim()) return;
-          const match = COMMANDS.find(c => c.startsWith(input.toLowerCase()));
-          if (match) {
-               setInput(match);
-          }
-     };
+  // ── Command stack for Up/Down arrow navigation ──
+  const [cmdStack, setCmdStack] = useState<string[]>([]);
 
-     return {
-          input,
-          setInput,
-          history,
-          handleCommand,
-          navigateHistory,
-          autocomplete,
-          passwordMode,
-          isAdmin,
-          matrixEnabled,
-     };
+  const handleCommand = (cmd: string) => {
+    if (!passwordMode && cmd.trim()) {
+      setCmdStack((prev) => [...prev, cmd]);
+    }
+    executeCommand(cmd);
+    setHistoryIndex(-1);
+  };
+
+  const navigateHistory = (direction: "up" | "down") => {
+    if (cmdStack.length === 0) return;
+
+    let newIndex = historyIndex;
+    if (direction === "up") {
+      if (newIndex === -1) {
+        newIndex = cmdStack.length - 1;
+      } else {
+        newIndex = Math.max(0, newIndex - 1);
+      }
+    } else {
+      if (newIndex === -1) return;
+      newIndex = Math.min(cmdStack.length - 1, newIndex + 1);
+    }
+
+    setHistoryIndex(newIndex);
+    setInput(cmdStack[newIndex]);
+  };
+
+  const autocomplete = () => {
+    if (!input.trim()) return;
+    const match = COMMANDS.find((c) => c.startsWith(input.toLowerCase()));
+    if (match) {
+      setInput(match);
+    }
+  };
+
+  return {
+    input,
+    setInput,
+    history,
+    handleCommand,
+    navigateHistory,
+    autocomplete,
+    passwordMode,
+    isAdmin,
+    matrixEnabled,
+  };
 }

@@ -3,7 +3,9 @@
 import { motion } from "framer-motion";
 import { Terminal } from "lucide-react";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useRef } from "react";
+
+const QUICK_COMMANDS = ["whoami", "projects", "skills", "cv"];
 
 export default function AboutGrid({
      playHover,
@@ -24,6 +26,15 @@ export default function AboutGrid({
      navigateHistory: (direction: "up" | "down") => void;
      autocomplete: () => void;
 }) {
+     const scrollRef = useRef<HTMLDivElement>(null);
+
+     // Auto-scroll to bottom when new output is added
+     useEffect(() => {
+          if (scrollRef.current) {
+               scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+          }
+     }, [commandHistory]);
+
      return (
           <section id="console" className="grid grid-cols-1 md:grid-cols-12 gap-4">
 
@@ -43,39 +54,93 @@ export default function AboutGrid({
                          <Terminal size={14} className="text-slate-400" />
                     </div>
                     <div className="flex-1 rounded-2xl border border-white/10 bg-black/70 px-4 py-3 text-emerald-100 shadow-inner overflow-hidden flex flex-col">
-                         <div className="flex-1 flex flex-col justify-end gap-1 overflow-y-auto scrollbar-hide" role="log" aria-live="polite" aria-label="Terminal output">
-                              {commandHistory.slice(-8).map((line, idx) => (
-                                   <div key={`${line}-${idx}`} className="text-xs text-emerald-100/90 break-all">
-                                        {line}
-                                   </div>
+                         {/* Terminal output */}
+                         <div
+                              ref={scrollRef}
+                              className="flex-1 flex flex-col gap-0.5 overflow-y-auto scrollbar-hide"
+                              role="log"
+                              aria-live="polite"
+                              aria-label="Terminal output"
+                         >
+                              {commandHistory.map((line, idx) => {
+                                   // Determine line styling based on content
+                                   let lineClass = "text-xs leading-relaxed break-all text-emerald-100/80";
+
+                                   if (line.startsWith("MOHAMMED@")) {
+                                        lineClass = "text-xs leading-relaxed break-all text-emerald-300 font-semibold";
+                                   } else if (line.startsWith("────")) {
+                                        lineClass = "text-xs leading-relaxed text-emerald-500/30";
+                                   } else if (line.startsWith("[SYSTEM READY]")) {
+                                        lineClass = "text-xs leading-relaxed text-emerald-400/70";
+                                   } else if (line.startsWith("user@") || line.startsWith("root@")) {
+                                        lineClass = "text-xs leading-relaxed break-all text-emerald-200/90";
+                                   } else if (line.startsWith("→")) {
+                                        lineClass = "text-xs leading-relaxed text-emerald-100/60 pl-2";
+                                   } else if (
+                                        line === "FOCUS" ||
+                                        line === "FEATURED PROJECTS" ||
+                                        line === "LANGUAGES" ||
+                                        line === "FULL-STACK" ||
+                                        line === "SECURITY" ||
+                                        line === "AI" ||
+                                        line === "CERTIFICATIONS"
+                                   ) {
+                                        lineClass = "text-xs leading-relaxed text-emerald-300/90 font-medium";
+                                   } else if (line.startsWith("[ IN PROGRESS ]")) {
+                                        lineClass = "text-xs leading-relaxed text-amber-400/80";
+                                   } else if (line === "") {
+                                        return <div key={idx} className="h-1.5" />;
+                                   }
+
+                                   return (
+                                        <div key={idx} className={lineClass}>
+                                             {line}
+                                        </div>
+                                   );
+                              })}
+                         </div>
+
+                         {/* Command input */}
+                         <div className="flex items-center gap-2 text-xs text-emerald-100 mt-2 pt-2 border-t border-white/5 shrink-0">
+                              <span className="text-emerald-400 animate-pulse" role="status" aria-label="Terminal prompt">{">"}</span>
+                              <input
+                                   value={commandInput}
+                                   type={passwordMode ? "password" : "text"}
+                                   onChange={(e) => setCommandInput(e.target.value)}
+                                   onKeyDown={(e) => {
+                                        if (e.key === "Enter") {
+                                             e.preventDefault();
+                                             handleCommand(commandInput);
+                                        } else if (e.key === "ArrowUp") {
+                                             e.preventDefault();
+                                             navigateHistory("up");
+                                        } else if (e.key === "ArrowDown") {
+                                             e.preventDefault();
+                                             navigateHistory("down");
+                                        } else if (e.key === "Tab") {
+                                             e.preventDefault();
+                                             autocomplete();
+                                        }
+                                   }}
+                                   className="w-full bg-transparent text-emerald-100 outline-none placeholder:text-emerald-700"
+                                   placeholder={passwordMode ? "password..." : "type a command..."}
+                                   autoComplete="off"
+                                   aria-label="terminal input"
+                              />
+                         </div>
+
+                         {/* Quick-command chips */}
+                         <div className="flex flex-wrap gap-1.5 mt-2 pt-2 border-t border-white/5 shrink-0">
+                              {QUICK_COMMANDS.map((cmd) => (
+                                   <button
+                                        key={cmd}
+                                        onClick={() => handleCommand(cmd)}
+                                        className="text-[10px] text-emerald-400/50 hover:text-emerald-300 border border-emerald-500/15 hover:border-emerald-400/40 rounded px-2 py-0.5 transition-colors font-mono focus:outline-none focus:ring-1 focus:ring-emerald-400/30"
+                                        aria-label={`Run ${cmd} command`}
+                                   >
+                                        [ {cmd} ]
+                                   </button>
                               ))}
-                              <div className="flex items-center gap-2 text-xs text-emerald-100 mt-1">
-                                   <span className="text-emerald-400" role="status" aria-label="Terminal prompt">{">"}</span>
-                                   <input
-                                        value={commandInput}
-                                        type={passwordMode ? "password" : "text"}
-                                        onChange={(e) => setCommandInput(e.target.value)}
-                                        onKeyDown={(e) => {
-                                             if (e.key === "Enter") {
-                                                  e.preventDefault();
-                                                  handleCommand(commandInput);
-                                             } else if (e.key === "ArrowUp") {
-                                                  e.preventDefault();
-                                                  navigateHistory("up");
-                                             } else if (e.key === "ArrowDown") {
-                                                  e.preventDefault();
-                                                  navigateHistory("down");
-                                             } else if (e.key === "Tab") {
-                                                  e.preventDefault();
-                                                  autocomplete();
-                                             }
-                                        }}
-                                        className="w-full bg-transparent text-emerald-100 outline-none placeholder:text-emerald-700"
-                                        placeholder={passwordMode ? "password..." : "type a command (help)"}
-                                        autoComplete="off"
-                                        aria-label="terminal input"
-                                   />
-                              </div>
                          </div>
                     </div>
                </motion.article>
