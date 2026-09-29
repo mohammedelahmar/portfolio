@@ -29,6 +29,17 @@ export const portfolioMetrics = [
 
 export const projects: Project[] = [
   {
+    title: "BioLock",
+    description:
+      "Behavioral biometric security system combining millisecond-precision keystroke dynamics with Isolation Forest anomaly detection to block stolen credentials.",
+    badge: "PYTHON // SCIKIT-LEARN",
+    accent: "green",
+    detail: "behavioral biometrics · isolation forest · anomaly detection · customtkinter",
+    image: "/projects/BioLock/Unlocked.png",
+    url: "/Biolock",
+    github: "https://github.com/mohammedelahmar/BioLock_Project",
+  },
+  {
     title: "ExpenseTracker",
     description:
       "Full-stack financial management system integrating OCR technology to automatically scan receipts, track expenses, and visualize spending analytics.",
