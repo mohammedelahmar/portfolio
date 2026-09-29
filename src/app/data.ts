@@ -37,7 +37,7 @@ export const projects: Project[] = [
     detail: "tesseract.js · chart.js · authentication · finance ops",
     image: "/projects/ExpenseTracker/Dashboard.png",
     url: "/expense-tracker",
-    github: "https://github.com/mohammedelahmar/Expense-Tracker",
+    github: "https://github.com/mohammedelahmar/ExpenseTracker",
   },
   {
     title: "InstaTrack Analytics",
@@ -70,7 +70,7 @@ export const projects: Project[] = [
     detail: "redux toolkit · jwt · rbac · admin dashboard",
     image: "/projects/EleganceShop/Home.png",
     url: "/elegance-shop",
-    github: "https://github.com/mohammedelahmar/elegance-shop",
+    github: "https://github.com/mohammedelahmar/Elegance_Shop",
   },
   {
     title: "TikTok Agent",
